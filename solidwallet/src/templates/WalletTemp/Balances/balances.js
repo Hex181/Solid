@@ -34,7 +34,12 @@ const Balances = () => {
                 </Box>
             </SimpleGrid>
 
-            <Divider my="30px" />
+            <Divider my="20px" />
+
+            <Box bg="brand.grey" py="20px" cursor="pointer">
+                <Text fontWeight="bold">Deposit SOLID</Text>
+                <Text>You will need SOLID tokens to perform transactions with your wallet</Text>
+            </Box>
         </Box>
     )
 };
