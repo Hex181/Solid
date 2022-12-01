@@ -40,7 +40,7 @@ const SetParaphraseKeyTemp = () => {
             <Box
               boxShadow="rgba(17, 17, 26, 0.05) 0px 4px 16px, rgba(17, 17, 26, 0.05) 0px 8px 32px"
               p="15px"
-              mt="20px"
+              my="20px"
               borderRadius="4px"
               mx="10px"
             >
@@ -61,7 +61,7 @@ const SetParaphraseKeyTemp = () => {
               </SimpleGrid>
             </Box>
 
-            <Flex justifyContent="space-evenly" w="100%" mx="auto" mt="20px">
+            <Flex justifyContent="space-evenly" w="100%" mx="auto" mt="40px">
               <CustomButton
                 w="180px"
                 bg="brand.white"
@@ -90,6 +90,8 @@ const SetParaphraseKeyTemp = () => {
               </CustomButton>
             </Flex>
 
+            <Text color="black" my="20px" textAlign="center" fontSize="14px">Note: Ensure to keep it safe and do not share with any one else.</Text>
+
             <CustomButton
               w="100%"
               bg="black"
@@ -98,8 +100,8 @@ const SetParaphraseKeyTemp = () => {
               hoverBg="white"
               hoverColor="black"
               testid="on-close"
-              href="/set-recovery-method"
-              mt="40px"
+              href="/verify-paraphrase-key"
+              mt="20px"
             >
               Proceed
             </CustomButton>
