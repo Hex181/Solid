@@ -10,6 +10,7 @@ import SetParaphraseKey from "../pages/SetParaphraseKey";
 import VerifyKey from "../pages/VerifyKey";
 import WalletHome from "../pages/walletHome";
 import SendMoney from "../pages/SendMoney";
+import ReceiveMoney from "../pages/ReceiveMoney";
 
 const AppRoute = () => {
 
@@ -24,6 +25,7 @@ const AppRoute = () => {
         <Route path="/verify-paraphrase-key" element={<VerifyKey />} />
         <Route path="/wallet" element={<WalletHome />} />
         <Route path="/send-money" element={<SendMoney />} />
+        <Route path="/receive-money" element={<ReceiveMoney />} />
       </Routes>
      </ChakraProvider>
     </BrowserRouter>,
