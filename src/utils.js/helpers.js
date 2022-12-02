@@ -5,7 +5,8 @@ export const generatePhrase = () => {
     return wallet.mnemonic.phrase.split(' ');
 }
 
-export const saveAccount = (mnemonic, password) => {
+export const saveAccount = (wordsArray, password) => {
+    const mnemonic = wordsArray.join(' ');
     const wallet = ethers.Wallet.fromMnemonic(mnemonic);
     const encryptedWallet = wallet.encrypt(password);
     localStorage.setItem('wallet', encryptedWallet);
