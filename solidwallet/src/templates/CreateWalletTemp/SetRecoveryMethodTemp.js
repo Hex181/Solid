@@ -1,9 +1,12 @@
 import { Box, Divider, Flex, Text } from "@chakra-ui/react";
+import { useState } from "react";
 import { securedIcon } from "../../assets/svgs/svg";
 import CustomButton from "../../components/CustomButton/customButton";
 import NavBar from "../../components/NavBar";
 
-const SetRecoveryMethodTemp = () => {
+const SetRecoveryMethodTemp = ({ handleContinue }) => {
+  const [selectedMethod, setSelectedMethod] = useState(0);
+
   return (
     <NavBar>
       <Box w="100%">
@@ -27,11 +30,11 @@ const SetRecoveryMethodTemp = () => {
             </Text>
 
             <Flex bg="#F0F9FE" p="10px" mt="20px" borderRadius="" borderLeftWidth="8px" borderLeftColor="black" alignItems="center" justifyContent="space-between">
-                <Box>
-                    <Text color="black" fontWeight="bold" fontSize="18px">Secure Passphrase</Text>
-                    <Text>Generate and safely store a unique passphrase.</Text>
-                </Box>
-                <Box>{securedIcon}</Box>
+              <Box onClick={() => setSelectedMethod(0)}>
+                <Text color="black" fontWeight="bold" fontSize="18px">Secure Passphrase</Text>
+                <Text>Generate and safely store a unique passphrase.</Text>
+              </Box>
+              <Box>{securedIcon}</Box>
             </Flex>
             <CustomButton
               w="100%"
@@ -41,10 +44,10 @@ const SetRecoveryMethodTemp = () => {
               hoverBg="white"
               hoverColor="black"
               testid="on-close"
-              href="/setup-paraphrase-key"
+              onClick={() => handleContinue(selectedMethod)}
               mt="40px"
             >
-              Secure My Account
+              Continue
             </CustomButton>
           </Box>
         </Box>

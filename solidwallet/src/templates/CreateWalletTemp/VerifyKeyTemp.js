@@ -4,17 +4,27 @@ import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/CustomButton/customButton";
 import NavBar from "../../components/NavBar";
 import TextInput from "../../components/TextInputs/TextInput";
+import { saveAccount } from "../../utils.js/helpers";
 
-const VerifyKeyTemp = () => {
-  const [key, setKey] = useState(null);
+const VerifyKeyTemp = ({ phrase }) => {
+  const [word, setWord] = useState("");
+  const [position, setPosition] = useState(Math.floor(Math.random() * 12) + 1);
+  //Generate random position between 1 and 12
   const navigate = useNavigate();
   const handleSubmit = (e) => {
+    console.log({ word, phrase, position })
     e.preventDefault();
-    navigate('/wallet');
+    if (phrase[position - 1] == word) {
+      //Save wallet
+      saveAccount(phrase, "");
+      navigate('/wallet');
+    } else {
+      //Alert error
+    }
   }
-    return (
-        <NavBar>
-                  <Box w="100%">
+  return (
+    <NavBar>
+      <Box w="100%">
         <Box
           w="40%"
           mx="auto"
@@ -29,13 +39,13 @@ const VerifyKeyTemp = () => {
           <Divider />
           <Box my="10px" color="brand.gray">
             <Text>
-            Enter the following word from your recovery phrase to complete the setup process.
+              Enter the following word from your recovery phrase to complete the setup process.
             </Text>
 
-            <Text fontWeight="bold" color="black" my="20px" fontSize="20px">Word #4</Text>
+            <Text fontWeight="bold" color="black" my="20px" fontSize="20px">Word #{position}</Text>
 
             <form onSubmit={handleSubmit}>
-              <TextInput type="number" placeholder="Enter key word #4" value={key} onChange={(e) => setKey(e.target.value)} />
+              <TextInput type="text" placeholder={`Enter key word #${position}`} value={word} onChange={(e) => setWord(e.target.value)} />
 
               <CustomButton
                 w="100%"
@@ -46,7 +56,7 @@ const VerifyKeyTemp = () => {
                 hoverColor="black"
                 testid="on-close"
                 mt="40px"
-                disabled={!key}
+                disabled={!word}
               >
                 Verify & Complete
               </CustomButton>
@@ -60,7 +70,7 @@ const VerifyKeyTemp = () => {
               hoverBg="white"
               hoverColor="black"
               testid="on-close"
-              href="/verify-paraphrase-key"
+              href="/create-wallet"
               mt="40px"
             >
               Start again
@@ -74,8 +84,8 @@ const VerifyKeyTemp = () => {
           </Text>
         </Box>
       </Box>
-        </NavBar>
-    )
+    </NavBar>
+  )
 };
 
 export default VerifyKeyTemp;
