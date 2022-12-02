@@ -7,7 +7,6 @@ const SetParaphraseKeyTemp = () => {
   const [keyPhrase, setKeyPhrase] = useState(null);
 
   const handleVerify = (phrase) => {
-    console.log({ phrase });
     setKeyPhrase(phrase);
     setIsVerifying(true);
   }

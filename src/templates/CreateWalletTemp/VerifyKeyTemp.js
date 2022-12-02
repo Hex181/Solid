@@ -12,7 +12,6 @@ const VerifyKeyTemp = ({ phrase }) => {
   //Generate random position between 1 and 12
   const navigate = useNavigate();
   const handleSubmit = (e) => {
-    console.log({ word, phrase, position })
     e.preventDefault();
     if (phrase[position - 1] == word) {
       //Save wallet
