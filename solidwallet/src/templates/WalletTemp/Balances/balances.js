@@ -8,12 +8,14 @@ const Balances = () => {
             <Text color="brand.gray">Available balance</Text>
 
             <SimpleGrid columns={4} gap="20px" mt="60px" justifyContent="center" placeItems="center" mx="150px" fontSize="14px">
-                <Box cursor="pointer">
-                    <Box bg="black" borderRadius="15px" p="15px" w="55px" textAlign="center">
-                        {sendIcon}
+                <a href="/send-money">
+                    <Box cursor="pointer">
+                        <Box bg="black" borderRadius="15px" p="15px" w="55px" textAlign="center">
+                            {sendIcon}
+                        </Box>
+                        <Text mt="5px">Send</Text>
                     </Box>
-                    <Text mt="5px">Send</Text>
-                </Box>
+                </a>
                 <Box cursor="pointer">
                     <Box bg="black" borderRadius="15px" p="15px" w="55px" textAlign="center">
                         {receiveIcon}

@@ -9,6 +9,7 @@ import SetRecoveryMethod from "../pages/setRecoveryMethod";
 import SetParaphraseKey from "../pages/SetParaphraseKey";
 import VerifyKey from "../pages/VerifyKey";
 import WalletHome from "../pages/walletHome";
+import SendMoney from "../pages/SendMoney";
 
 const AppRoute = () => {
 
@@ -22,6 +23,7 @@ const AppRoute = () => {
         <Route path="/setup-paraphrase-key" element={<SetParaphraseKey />} />
         <Route path="/verify-paraphrase-key" element={<VerifyKey />} />
         <Route path="/wallet" element={<WalletHome />} />
+        <Route path="/send-money" element={<SendMoney />} />
       </Routes>
      </ChakraProvider>
     </BrowserRouter>,
