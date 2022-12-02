@@ -9,7 +9,9 @@ const AuthNavBar = ({ children }) => (
         <a href="/">
           <Image src={BrandLogo} alt="brand-logo" />
         </a>
-        <Text cursor="pointer" _hover={{ color: "#81B3FF" }} style={{ transition: "all 1.2s ease" }} >Wallet</Text>
+        <a href="/wallet">
+          <Text cursor="pointer" _hover={{ color: "#81B3FF" }} style={{ transition: "all 1.2s ease" }}>Wallet</Text>
+        </a>
       </Flex>
       <CustomButton
         width="180px"

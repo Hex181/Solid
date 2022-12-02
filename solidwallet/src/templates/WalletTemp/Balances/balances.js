@@ -16,12 +16,14 @@ const Balances = () => {
                         <Text mt="5px">Send</Text>
                     </Box>
                 </a>
-                <Box cursor="pointer">
-                    <Box bg="black" borderRadius="15px" p="15px" w="55px" textAlign="center">
-                        {receiveIcon}
+                <a href="/receive-money">
+                    <Box cursor="pointer">
+                        <Box bg="black" borderRadius="15px" p="15px" w="55px" textAlign="center">
+                            {receiveIcon}
+                        </Box>
+                        <Text mt="5px">Receive</Text>
                     </Box>
-                    <Text mt="5px">Receive</Text>
-                </Box>
+                </a>
                 <Box cursor="pointer">
                     <Box bg="black" borderRadius="15px" p="15px" w="55px" textAlign="center">
                         {plusIcon}

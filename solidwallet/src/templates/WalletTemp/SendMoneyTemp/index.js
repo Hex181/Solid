@@ -1,12 +1,12 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import ReceiveMoneyForm from "../../../components/Form/ReceiveMoneyForm";
+import { useNavigate } from "react-router-dom";
 import SendMoneyForm from "../../../components/Form/SendMoneyForm";
 import AuthNavBar from "../../../components/NavBar/AuthNavBar";
-import ReceiveMoney from "../../../pages/ReceiveMoney";
 
 const SendMoneyTemp = () => {
-  const [showBalance, setShowBalance] = useState(true);
+  const [showBalance] = useState(true);
+  const navigate = useNavigate();
 
   return (
     <AuthNavBar>
@@ -33,7 +33,7 @@ const SendMoneyTemp = () => {
                 >
                   <Text
                     color={!showBalance && "brand.gray"}
-                    onClick={() => setShowBalance(true)}
+                    onClick={() => navigate('/send-money')}
                     cursor="pointer"
                     bg={!showBalance && "#FAFAFA"}
                     py="20px"
@@ -44,7 +44,7 @@ const SendMoneyTemp = () => {
                   </Text>
                   <Text
                     color={showBalance && "brand.gray"}
-                    onClick={() => setShowBalance(false)}
+                    onClick={() => navigate('/receive-money')}
                     cursor="pointer"
                     bg={showBalance && "#FAFAFA"}
                     py="20px"
@@ -55,7 +55,7 @@ const SendMoneyTemp = () => {
                   </Text>
                 </Flex>
                 <Box mt="60px" mb="20px" mx="auto">
-                  {showBalance ? <SendMoneyForm /> : <ReceiveMoneyForm />}
+                    <SendMoneyForm />
                 </Box>
               </Box>
             </Flex>
