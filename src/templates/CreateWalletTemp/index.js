@@ -1,7 +1,4 @@
-import { Box, Divider, Text } from "@chakra-ui/react";
 import { useState } from "react";
-import CustomButton from "../../components/CustomButton/customButton";
-import NavBar from "../../components/NavBar";
 import SetParaphraseKeyTemp from "./SetParaphraseKeyTemp";
 import SetRecoveryMethodTemp from "./SetRecoveryMethodTemp";
 

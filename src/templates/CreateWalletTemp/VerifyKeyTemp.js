@@ -5,6 +5,7 @@ import CustomButton from "../../components/CustomButton/customButton";
 import NavBar from "../../components/NavBar";
 import TextInput from "../../components/TextInputs/TextInput";
 import { saveAccount } from "../../utils.js/helpers";
+import { toaster } from "evergreen-ui";
 
 const VerifyKeyTemp = ({ phrase }) => {
   const [word, setWord] = useState("");
@@ -16,23 +17,24 @@ const VerifyKeyTemp = ({ phrase }) => {
     if (phrase[position - 1] == word) {
       //Save wallet
       saveAccount(phrase, "");
-      navigate('/wallet');
+      navigate('/create-password');
     } else {
       //Alert error
+      toaster.danger("Phrase key do not match !", { id: "mess" })
     }
   }
   return (
     <NavBar>
       <Box w="100%">
         <Box
-          w="40%"
+          w={{ base: "80%", lg: "40%" }}
           mx="auto"
           my="30px"
           p="20px"
           boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
           borderRadius="8px"
         >
-          <Text fontSize="40px" fontWeight="bold">
+          <Text fontSize={{ base: "25", lg: "40px"}} fontWeight="bold">
             Verify Your Phrase
           </Text>
           <Divider />
@@ -78,9 +80,11 @@ const VerifyKeyTemp = ({ phrase }) => {
         </Box>
         <Box color="brand.gray" textAlign="center">
           <Text>Already have a wallet ?</Text>
-          <Text as="u" mt="10px" cursor="pointer">
-            Import Existing Wallet
-          </Text>
+          <a href="/import-wallet">
+            <Text as="u" mt="10px" cursor="pointer">
+              Import Existing Wallet
+            </Text>
+          </a>
         </Box>
       </Box>
     </NavBar>

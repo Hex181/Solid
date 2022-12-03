@@ -11,3 +11,8 @@ export const saveAccount = async (wordsArray, password) => {
     const encryptedWallet = await wallet.encrypt(password);
     localStorage.setItem('wallet', encryptedWallet);
 }
+
+export const PasswordValidate = (value, setIsValidating) => {
+    const validate = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$/gm;
+    validate.test(value) ? setIsValidating(true) : setIsValidating(false)
+}

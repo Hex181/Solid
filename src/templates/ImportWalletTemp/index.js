@@ -1,12 +1,9 @@
 import { Box, Divider, Flex, Text } from "@chakra-ui/react";
-import { useState } from "react";
 import { securedIcon } from "../../assets/svgs/svg";
 import CustomButton from "../../components/CustomButton/customButton";
 import NavBar from "../../components/NavBar";
 
-const SetRecoveryMethodTemp = ({ handleContinue }) => {
-  const [selectedMethod, setSelectedMethod] = useState(0);
-
+const ImportWalletTemp = () => {
   return (
     <NavBar>
       <Box w="100%">
@@ -19,20 +16,33 @@ const SetRecoveryMethodTemp = ({ handleContinue }) => {
           borderRadius="8px"
         >
           <Text fontSize="34px" fontWeight="bold">
-            Choose a Security Method
+            Import your Wallet
           </Text>
           <Divider />
           <Box my="10px" color="brand.gray">
             <Text>
-              Select a method to secure and recover your account. This will be
-              used to verify important activity, recover your account and access
-              your account from other devices.
+              If you’ve setup one or more account recovery methods, follow the
+              instructions below to import your account.
             </Text>
 
-            <Flex bg="#F0F9FE" p="10px" mt="20px" borderRadius="" borderLeftWidth="8px" borderLeftColor="black" alignItems="center" justifyContent="space-between">
-              <Box onClick={() => setSelectedMethod(0)}>
-                <Text color="black" fontWeight="bold" fontSize="18px">Secure Passphrase</Text>
-                <Text>Generate and safely store a unique passphrase.</Text>
+            <Flex
+              bg="#F0F9FE"
+              p="10px"
+              mt="20px"
+              borderRadius=""
+              borderLeftWidth="8px"
+              borderLeftColor="black"
+              alignItems="center"
+              justifyContent="space-between"
+            >
+              <Box>
+                <Text color="black" fontWeight="bold" fontSize="18px">
+                  Recover via Passphrase
+                </Text>
+                <Text>
+                  Make sure you have your 12 word recovery phrase, then click
+                  below to begin the recovery process..
+                </Text>
               </Box>
               <Box>{securedIcon}</Box>
             </Flex>
@@ -44,24 +54,24 @@ const SetRecoveryMethodTemp = ({ handleContinue }) => {
               hoverBg="white"
               hoverColor="black"
               testid="on-close"
-              onClick={() => handleContinue(selectedMethod)}
               mt="40px"
+              href="/recover-seed-phrase"
             >
-              Continue
+              Import Wallet
             </CustomButton>
           </Box>
         </Box>
         <Box color="brand.gray" textAlign="center">
-          <Text>Already have a wallet ?</Text>
-          <a href="/import-wallet">
-            <Text as="u" mt="10px" cursor="pointer">
-              Import Existing Wallet
-            </Text>
-          </a>
+          <Text>Don't have a wallet ?</Text>
+          <a href="/create-wallet">
+                <Text as="u" mt="10px" cursor="pointer">
+                Create a Wallet
+                </Text>
+            </a>
         </Box>
       </Box>
     </NavBar>
   );
 };
 
-export default SetRecoveryMethodTemp;
+export default ImportWalletTemp;

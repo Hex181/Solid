@@ -8,6 +8,10 @@ import { CreateWallet } from "../pages/createWallet";
 import WalletHome from "../pages/walletHome";
 import SendMoney from "../pages/SendMoney";
 import ReceiveMoney from "../pages/ReceiveMoney";
+import Login from "../pages/Login";
+import CreatePassword from "../pages/CreatePassword";
+import ImportWallet from "../pages/ImportWallet";
+import RecoverSeedPhrase from "../pages/RecoverSeedPhrase";
 
 const AppRoute = () => {
 
@@ -20,6 +24,10 @@ const AppRoute = () => {
           <Route path="/wallet" element={<WalletHome />} />
           <Route path="/send-money" element={<SendMoney />} />
           <Route path="/receive-money" element={<ReceiveMoney />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/create-password" element={<CreatePassword />} />
+          <Route path="/import-wallet" element={<ImportWallet />} />
+          <Route path="/recover-seed-phrase" element={<RecoverSeedPhrase />} />
         </Routes>
       </ChakraProvider>
     </BrowserRouter>,
