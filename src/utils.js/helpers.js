@@ -59,12 +59,64 @@ export async function getTokensBalances(address) {
             symbol: b.contract_ticker_symbol,
             logo: b.logo_url,
             decimals: b.contract_decimals,
-            balance: (b.balance / 10 ** b.contract_decimals).toFixed(4),
+            balance: parseFloat((b.balance / 10 ** b.contract_decimals).toFixed(4)),
             rate: b.quote_rate,
-            value: b.quote.toFixed(2)
+            value: parseFloat(b.quote.toFixed(2))
         }
     });
     return modifiedBalances;
+}
+
+export async function send_token(
+    contract_address,
+    amount,
+    to,
+    signer
+) {
+
+    const currentGasPrice = await provider.getGasPrice();
+    let gas_price = ethers.utils.hexlify(parseInt(currentGasPrice));
+    console.log(`gas_price: ${gas_price}`);
+
+    if (contract_address) {
+        // Send erc20 tokens
+        const send_abi = ["function transfer(address to, uint amount) returns (bool)"];
+        let contract = new ethers.Contract(
+            contract_address,
+            send_abi,
+            signer
+        )
+
+        // Token amount
+        let numberOfTokens = ethers.utils.parseEther(amount);
+        console.log(`numberOfTokens: ${numberOfTokens}`)
+
+        // Send tokens
+        const transferTxn = await contract.transfer(to, numberOfTokens);
+        console.log("transfer transaction sent: ", transferTxn)
+        return transferTxn;
+    } // Send native token
+    else {
+        const tx = {
+            from: signer.address,
+            to: to,
+            value: ethers.utils.parseEther(amount),
+            nonce: provider.getTransactionCount(
+                signer.address,
+                "latest"
+            ),
+            gasLimit: 100000,
+            gasPrice: gas_price,
+        }
+        console.log(tx);
+        try {
+            const txResult = await signer.sendTransaction(tx);
+            console.log("transfer transaction sent: ", txResult);
+            return txResult;
+        } catch (error) {
+            console.log(error);
+        }
+    }
 }
 
 export const PasswordValidate = (value, setIsValidating) => {

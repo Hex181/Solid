@@ -2,13 +2,15 @@ import { Box, Flex, Text } from "@chakra-ui/react";
 import { useState, useEffect } from "react";
 import CustomButton from "../CustomButton/customButton";
 import TextInput from "../TextInputs/TextInput";
-import { getNativeBalance, getTokensBalances } from "../../utils.js/helpers";
+import { getNativeBalance, getTokensBalances, send_token } from "../../utils.js/helpers";
+import { toaster } from "evergreen-ui";
 
 const SendMoneyForm = ({ account, handleContinue }) => {
   const [amount, setAmount] = useState(null);
   const [tokens, setTokens] = useState();
   const [selectedToken, setSelectedToken] = useState();
   const [nativeBalance, setNativeBalance] = useState("0.0000");
+  const [receiver, setReceiver] = useState("0x82Ae380939060F72B37c1Ac82b45Ac48F62134Df");
 
   useEffect(() => {
     getNativeBalance(account.address).then((res) => setNativeBalance(res));
@@ -18,8 +20,11 @@ const SendMoneyForm = ({ account, handleContinue }) => {
     })
   }, [])
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+    const res = await send_token(selectedToken?.address, amount, receiver, account);
+    toaster.success(`Token sent!`);
+    console.log(res);
   }
 
   return (
