@@ -1,27 +1,55 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Avatar, Box, Divider, Flex, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import AuthNavBar from "../../components/NavBar/AuthNavBar";
+import { getAccountDetails, getTransactions } from "../../utils.js/helpers";
 import Balances from "./Balances/balances";
 import Collectibles from "./Collectibles/Collectibles";
 
-const WalletTemp = () => {
+const WalletTemp = ({ account }) => {
     const [showBalance, setShowBalance] = useState(true);
+    const [transactions, setTransactions] = useState();
 
-    const transactions = [
-        {
-            amount: "0.0233",
-            type: "BTC"
-        },
-        {
-            amount: "12.003",
-            type: "BTC"
-        },
-        {
-            amount: "2033.22",
-            type: "BTC"
-        },
-    ]
+
+    const trim = (str) => {
+        return str.slice(0, 30) + "...";
+    }
+
+    const getAllTransactions = async (addr) => {
+        try {
+            const res = await getTransactions(addr);
+            setTransactions(res);
+        } catch (err) {
+            console.log(err);
+        }
+    }
+
+
+    useEffect(() => {
+        getAllTransactions(account.address);
+    }, [])
+    // const transactions = [
+    //     {
+    //         hash: "0x732910D9054ceaCb4527c4793C0db3559D5f9Bd1y3ihdfkiy4rgsjltnhtrksoeroigfk",
+    //         to: "0xc167ECBe026780438751Be1683dB051af2120669",
+    //         value: "40"
+    //     },
+    //     {
+    //         hash: "0x732910D9054ceaCb4527c4793C0db3559D5f9Bd1y3ihdfkiy4rgsjltnhtrksoeroigfk",
+    //         to: "0xc167ECBe026780438751Be1683dB051af2120669",
+    //         value: "40"
+    //     },
+    //     {
+    //         hash: "0x732910D9054ceaCb4527c4793C0db3559D5f9Bd1y3ihdfkiy4rgsjltnhtrksoeroigfk",
+    //         to: "0xc167ECBe026780438751Be1683dB051af2120669",
+    //         value: "40"
+    //     },
+    //     {
+    //         hash: "0x732910D9054ceaCb4527c4793C0db3559D5f9Bd1y3ihdfkiy4rgsjltnhtrksoeroigfk",
+    //         to: "0xc167ECBe026780438751Be1683dB051af2120669",
+    //         value: "40"
+    //     },
+    // ]
     return (
         <AuthNavBar>
             <Box mx={{ base: "30px", lg: "120px" }} mt="100px">
@@ -32,26 +60,25 @@ const WalletTemp = () => {
                             <Text color={showBalance && "brand.gray"} onClick={() => setShowBalance(false)} cursor="pointer" bg={showBalance && "#FAFAFA"} py="20px" w="50%" textAlign="center">Collectibles</Text>
                         </Flex>
                         <Box mt="60px" mb="20px">
-                            {showBalance ? <Balances /> : <Collectibles />}
+                            {showBalance ? <Balances address={account.address} /> : <Collectibles address={account.address} />}
                         </Box>
                     </Box>
                     <Box w={{ base: "100%", lg: "30%" }} mt={{ base: "20px", lg: 0 }}>
                         <Box boxShadow="rgba(0, 0, 0, 0.09) 0px 3px 12px" w="100%" borderRadius="4px" border="1px solid #9C9C9C" p="20px">
                             <Text fontSize="25px" fontWeight="bold">Recent Activities</Text>
-                            
-                            {transactions.map((transaction) => (
+
+                            {transactions?.map((transaction) => (
                                 <>
-                                <Flex justifyContent="space-between" mt="20px">
-                                    <Flex alignItems="center">
-                                        <Avatar name='Bitcoin' size="sm" src='https://cryptologos.cc/logos/bitcoin-btc-logo.png' />
-                                        <Box ml="20px" fontSize="14px" color="brand.gray">
-                                            <Text fontWeight="bold">Bitcoin</Text>
-                                            <Text>{transaction.type}</Text>
-                                        </Box>
+                                    <Flex justifyContent="space-between" mt="20px">
+                                        <Flex alignItems="center">
+                                            <Box ml="20px" fontSize="14px" color="brand.gray">
+                                                <Text fontWeight="bold">tx: {trim(transaction.hash)}</Text>
+                                                <Text>to: {trim(transaction.to)}</Text>
+                                            </Box>
+                                        </Flex>
+                                        <Text fontWeight="bold">{transaction.value}</Text>
                                     </Flex>
-                                    <Text fontWeight="bold">{transaction.amount}</Text>
-                                </Flex>
-                                <Divider my="10px" />
+                                    <Divider my="10px" />
                                 </>
                             ))}
                             <Box mt="30px">

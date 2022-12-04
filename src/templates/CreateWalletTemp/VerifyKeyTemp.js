@@ -7,22 +7,21 @@ import TextInput from "../../components/TextInputs/TextInput";
 import { saveAccount } from "../../utils.js/helpers";
 import { toaster } from "evergreen-ui";
 
-const VerifyKeyTemp = ({ phrase }) => {
+const VerifyKeyTemp = ({ phrase, handleVerified }) => {
   const [word, setWord] = useState("");
-  const [position, setPosition] = useState(Math.floor(Math.random() * 12) + 1);
   //Generate random position between 1 and 12
-  const navigate = useNavigate();
+  const [position, setPosition] = useState(Math.floor(Math.random() * 12) + 1);
   const handleSubmit = (e) => {
     e.preventDefault();
     if (phrase[position - 1] == word) {
       //Save wallet
-      saveAccount(phrase, "");
-      navigate('/create-password');
+      handleVerified();
     } else {
       //Alert error
       toaster.danger("Phrase key do not match !", { id: "mess" })
     }
   }
+
   return (
     <NavBar>
       <Box w="100%">
@@ -34,7 +33,7 @@ const VerifyKeyTemp = ({ phrase }) => {
           boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
           borderRadius="8px"
         >
-          <Text fontSize={{ base: "25", lg: "40px"}} fontWeight="bold">
+          <Text fontSize={{ base: "25", lg: "40px" }} fontWeight="bold">
             Verify Your Phrase
           </Text>
           <Divider />

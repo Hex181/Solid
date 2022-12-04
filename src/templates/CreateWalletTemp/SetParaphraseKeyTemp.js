@@ -1,9 +1,12 @@
 import { useState } from "react";
 import GeneratePassphrase from "./GeneratePassphrase";
 import VerifyKeyTemp from "./VerifyKeyTemp";
+import CreatePasswordTemp from "./CreatePasswordTemp";
+import { saveAccount } from "../../utils.js/helpers";
 
 const SetParaphraseKeyTemp = () => {
   const [isVerifying, setIsVerifying] = useState(false);
+  const [isVerified, setIsVerified] = useState(false);
   const [keyPhrase, setKeyPhrase] = useState(null);
 
   const handleVerify = (phrase) => {
@@ -11,9 +14,19 @@ const SetParaphraseKeyTemp = () => {
     setIsVerifying(true);
   }
 
+  const handleVerified = () => {
+    setIsVerifying(false);
+    setIsVerified(true);
+  }
+
+  const createWallet = (password) => {
+    saveAccount(keyPhrase, password);
+  }
+
   return (
-    isVerifying ? <VerifyKeyTemp phrase={keyPhrase} /> :
-      <GeneratePassphrase handleVerify={handleVerify} />
+    isVerified ? <CreatePasswordTemp createWallet={createWallet} /> :
+      isVerifying ? <VerifyKeyTemp handleVerified={handleVerified} /> :
+        <GeneratePassphrase handleVerify={handleVerify} />
   );
 };
 
