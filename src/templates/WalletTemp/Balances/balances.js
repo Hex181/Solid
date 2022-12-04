@@ -1,17 +1,18 @@
 import { Box, Divider, Flex, SimpleGrid, Text, Avatar } from "@chakra-ui/react";
 import { plusIcon, receiveIcon, sendIcon, swapIcon } from "../../../assets/svgs/svg";
-import { toaster } from "evergreen-ui";
+import { Spinner, toaster } from "evergreen-ui";
 import { useEffect, useState } from "react";
 import { getTokensBalances } from "../../../utils.js/helpers";
 
 const Balances = ({ address, handleSendMoney, handleReceiveMoney }) => {
     const [totalValue, setTotalValue] = useState(0);
-    const [outcome, setOutcome] = useState({});
+    const [isLoading, setIsLoading] = useState(false);
     const [balances, setBalances] = useState();
 
     console.log(balances);
 
     const getBalances = async () => {
+        setIsLoading(true);
         try {
             const res = await getTokensBalances(address);
             setBalances(res);
@@ -21,10 +22,12 @@ const Balances = ({ address, handleSendMoney, handleReceiveMoney }) => {
                 value += Number(token.value);
             })
             setTotalValue(value);
+            setIsLoading(false);
 
         } catch (err) {
             console.log(err);
             toaster.danger("An error occured!");
+            setIsLoading(false);
         }
     }
 
@@ -34,7 +37,9 @@ const Balances = ({ address, handleSendMoney, handleReceiveMoney }) => {
 
     return (
         <Box w="100%" textAlign="center">
+            {isLoading ?  <Flex justifyContent="center" my="30px"><Spinner /></Flex> :
             <Text fontSize="40px" fontWeight="bold">{totalValue} USD</Text>
+            }
             <Text color="brand.gray">Portfolio Value</Text>
 
             <SimpleGrid columns={4} gap="20px" mt="60px" justifyContent="center" placeItems="center" mx={{ base: "30px", lg: "150px" }} fontSize="14px">

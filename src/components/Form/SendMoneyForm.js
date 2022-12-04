@@ -26,8 +26,6 @@ const SendMoneyForm = ({ account, handleContinue }) => {
 
   const findToken = tokens?.filter((res) => res?.address === selectedToken);
 
-  console.log(findToken);
-
   const handleSubmit = async (e) => {
     e.preventDefault();
     const res = await send_token('0x3Ea16A3E1FD39690822C8cDF764719ECbd047f14', amount, receiver, account, setIsSending);
@@ -97,7 +95,7 @@ const SendMoneyForm = ({ account, handleContinue }) => {
             isLoading={isSending}
             disabled={!amount || !selectedToken}
           >
-            Continue
+            Send
           </CustomButton>
         </Box>
       </form>
