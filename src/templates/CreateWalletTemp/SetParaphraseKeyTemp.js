@@ -25,7 +25,7 @@ const SetParaphraseKeyTemp = () => {
 
   return (
     isVerified ? <CreatePasswordTemp createWallet={createWallet} /> :
-      isVerifying ? <VerifyKeyTemp handleVerified={handleVerified} /> :
+      isVerifying ? <VerifyKeyTemp phrase={keyPhrase} handleVerified={handleVerified} /> :
         <GeneratePassphrase handleVerify={handleVerify} />
   );
 };

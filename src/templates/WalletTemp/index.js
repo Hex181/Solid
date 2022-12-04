@@ -28,28 +28,7 @@ const WalletTemp = ({ account }) => {
     useEffect(() => {
         getAllTransactions(account.address);
     }, [])
-    // const transactions = [
-    //     {
-    //         hash: "0x732910D9054ceaCb4527c4793C0db3559D5f9Bd1y3ihdfkiy4rgsjltnhtrksoeroigfk",
-    //         to: "0xc167ECBe026780438751Be1683dB051af2120669",
-    //         value: "40"
-    //     },
-    //     {
-    //         hash: "0x732910D9054ceaCb4527c4793C0db3559D5f9Bd1y3ihdfkiy4rgsjltnhtrksoeroigfk",
-    //         to: "0xc167ECBe026780438751Be1683dB051af2120669",
-    //         value: "40"
-    //     },
-    //     {
-    //         hash: "0x732910D9054ceaCb4527c4793C0db3559D5f9Bd1y3ihdfkiy4rgsjltnhtrksoeroigfk",
-    //         to: "0xc167ECBe026780438751Be1683dB051af2120669",
-    //         value: "40"
-    //     },
-    //     {
-    //         hash: "0x732910D9054ceaCb4527c4793C0db3559D5f9Bd1y3ihdfkiy4rgsjltnhtrksoeroigfk",
-    //         to: "0xc167ECBe026780438751Be1683dB051af2120669",
-    //         value: "40"
-    //     },
-    // ]
+
     return (
         <AuthNavBar>
             <Box mx={{ base: "30px", lg: "120px" }} mt="100px">

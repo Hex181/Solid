@@ -1,12 +1,11 @@
 import { Box, Divider, Text } from "@chakra-ui/react";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/CustomButton/customButton";
 import NavBar from "../../components/NavBar";
 import PasswordInput from "../../components/TextInputs/PasswordInput";
-import { getAccountDetails, PasswordValidate } from "../../utils.js/helpers";
+import { PasswordValidate } from "../../utils.js/helpers";
 import { toaster } from "evergreen-ui";
-import AccountContext from "../../context/Account";
 
 const CreatePasswordTemp = ({ createWallet }) => {
   const navigate = useNavigate();
@@ -14,7 +13,6 @@ const CreatePasswordTemp = ({ createWallet }) => {
   const [confirmPassword, setConfirmPassword] = useState('');
   const [isPasswordValidating, setIsPasswordValidating] = useState(false);
   const [isConfirmValidating, setIsConfirmValidating] = useState(false);
-  const account = useContext(AccountContext);
 
   const handleOnChange = (e) => {
     setPassword(e.target.value);
@@ -28,8 +26,6 @@ const CreatePasswordTemp = ({ createWallet }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     createWallet(password);
-    const details = await getAccountDetails(password);
-    Object.assign(account, details);
     toaster.success("Wallet Created Successfully !", { id: "mess", duration: 2 });
     setTimeout(() => {
       navigate('/');

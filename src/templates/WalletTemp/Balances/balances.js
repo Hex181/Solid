@@ -12,6 +12,7 @@ const Balances = ({ address }) => {
     const getBalances = async () => {
         try {
             const res = await getTokensBalances(address);
+            console.log(address);
             setBalances(res);
             let value = 0;
             res.map((token) => {
