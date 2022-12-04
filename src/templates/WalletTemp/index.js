@@ -1,14 +1,16 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import { Avatar, Box, Divider, Flex, Text } from "@chakra-ui/react";
+import { Box, Divider, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import AuthNavBar from "../../components/NavBar/AuthNavBar";
 import { getTransactions } from "../../utils.js/helpers";
 import Balances from "./Balances/balances";
 import Collectibles from "./Collectibles/Collectibles";
+import { Spinner } from "evergreen-ui";
 
 const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
     const [showBalance, setShowBalance] = useState(true);
     const [transactions, setTransactions] = useState();
+    const [isLoading, setIsLoading] = useState(false);
 
 
     const trim = (str) => {
@@ -16,11 +18,14 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
     }
 
     const getAllTransactions = async (addr) => {
+        setIsLoading(true);
         try {
+            setIsLoading(false)
             const res = await getTransactions(addr);
             setTransactions(res);
         } catch (err) {
             console.log(err);
+            setIsLoading(false)
         }
     }
 
@@ -37,11 +42,13 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
                             <Text color={!showBalance && "brand.gray"} onClick={() => setShowBalance(true)} cursor="pointer" bg={!showBalance && "#FAFAFA"} py="20px" w="50%" textAlign="center">Balances</Text>
                             <Text color={showBalance && "brand.gray"} onClick={() => setShowBalance(false)} cursor="pointer" bg={showBalance && "#FAFAFA"} py="20px" w="50%" textAlign="center">Collectibles</Text>
                         </Flex>
+                        {isLoading ? <Flex justifyContent="center" my="30px"><Spinner /></Flex> :
                         <Box mt="60px" mb="20px">
                             {showBalance ?
                                 <Balances address={account.address} handleSendMoney={handleSendMoney} handleReceiveMoney={handleReceiveMoney} /> :
                                 <Collectibles address={account.address} />}
                         </Box>
+                        }
                     </Box>
                     <Box w={{ base: "100%", lg: "30%" }} mt={{ base: "20px", lg: 0 }}>
                         <Box boxShadow="rgba(0, 0, 0, 0.09) 0px 3px 12px" w="100%" borderRadius="4px" border="1px solid #9C9C9C" p="20px">
@@ -49,7 +56,7 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
 
                             {transactions?.map((transaction) => (
                                 <>
-                                    <a href={`https://evm.evmos.dev/tx/${transaction.hash}`} target="_blank">
+                                    <a href={`https://evm.evmos.dev/tx/${transaction.hash}`} target="_blank" rel="noreferrer">
                                         <Flex justifyContent="space-between" mt="20px">
                                             <Flex alignItems="center">
                                                 <Box ml="20px" fontSize="14px" color="brand.gray">
@@ -64,7 +71,7 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
                                 </>
                             ))}
                             <Box mt="30px">
-                                <a href={`https://evm.evmos.dev/address/${account.address}`} target="_blank">
+                                <a href={`https://evm.evmos.dev/address/${account.address}`} target="_blank" rel="noreferrer">
                                     <Text as="u" fontSize="14px" >View all transactions</Text>
                                 </a>
                             </Box>

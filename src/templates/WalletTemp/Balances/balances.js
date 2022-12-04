@@ -1,13 +1,15 @@
-import { Box, Divider, Flex, SimpleGrid, Text } from "@chakra-ui/react";
+import { Box, Divider, Flex, SimpleGrid, Text, Avatar } from "@chakra-ui/react";
 import { plusIcon, receiveIcon, sendIcon, swapIcon } from "../../../assets/svgs/svg";
-import { Avatar, toaster } from "evergreen-ui";
+import { toaster } from "evergreen-ui";
 import { useEffect, useState } from "react";
 import { getTokensBalances } from "../../../utils.js/helpers";
 
 const Balances = ({ address, handleSendMoney, handleReceiveMoney }) => {
     const [totalValue, setTotalValue] = useState(0);
+    const [outcome, setOutcome] = useState({});
     const [balances, setBalances] = useState();
 
+    console.log(balances);
 
     const getBalances = async () => {
         try {
@@ -15,6 +17,7 @@ const Balances = ({ address, handleSendMoney, handleReceiveMoney }) => {
             setBalances(res);
             let value = 0;
             res.map((token) => {
+                console.log(token);
                 value += Number(token.value);
             })
             setTotalValue(value);
@@ -67,7 +70,7 @@ const Balances = ({ address, handleSendMoney, handleReceiveMoney }) => {
                 <>
                     <Flex justifyContent="space-between" m="20px">
                         <Flex>
-                            {/* <Avatar name='Bitcoin' size="sm" src='https://cryptologos.cc/logos/bitcoin-btc-logo.png' /> */}
+                            <Avatar name={token.name} size="sm" src={token.logo} />
                             <Box ml="20px" fontSize="14px" color="brand.gray" textAlign="left">
                                 <Text fontWeight="bold">{token.symbol}</Text>
                                 <Text>{token.name}</Text>

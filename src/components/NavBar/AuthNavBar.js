@@ -10,7 +10,7 @@ const AuthNavBar = ({ children }) => (
         <a href="/">
           <Image src={BrandLogo} alt="brand-logo" width={{ base: "60%", lg: "100%" }} />
         </a>
-        <a href="/wallet">
+        <a href="/">
           <Text cursor="pointer" display={{ base: "none", lg: "flex" }} _hover={{ color: "#81B3FF" }} style={{ transition: "all 1.2s ease" }}>Wallet</Text>
         </a>
       </Flex>
