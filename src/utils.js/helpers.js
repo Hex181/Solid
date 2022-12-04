@@ -1,4 +1,5 @@
 import { ethers } from 'ethers';
+import { toaster } from 'evergreen-ui';
 const testneturl = "https://eth.bd.evmos.dev:8545";
 const provider = new ethers.providers.JsonRpcProvider(testneturl);
 const testnetChainId = "9000"
@@ -71,9 +72,10 @@ export async function send_token(
     contract_address,
     amount,
     to,
-    signer
+    signer,
+    setIsSending
 ) {
-
+    setIsSending(true);
     const currentGasPrice = await provider.getGasPrice();
     let gas_price = ethers.utils.hexlify(parseInt(currentGasPrice));
     console.log(`gas_price: ${gas_price}`);
@@ -94,9 +96,11 @@ export async function send_token(
         // Send tokens
         const transferTxn = await contract.transfer(to, numberOfTokens);
         console.log("transfer transaction sent: ", transferTxn)
+        setIsSending(false);
         return transferTxn;
     } // Send native token
     else {
+        setIsSending(true);
         const tx = {
             from: signer.address,
             to: to,
@@ -112,9 +116,12 @@ export async function send_token(
         try {
             const txResult = await signer.sendTransaction(tx);
             console.log("transfer transaction sent: ", txResult);
+            setIsSending(false);
             return txResult;
         } catch (error) {
-            console.log(error);
+            toaster.danger("Insuffient fund !");
+            setIsSending(false);
+            console.log({ error });
         }
     }
 }

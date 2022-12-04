@@ -8,18 +8,21 @@ import { getAccountDetails } from "../utils.js/helpers";
 
 const WalletHome = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
+    const [isLoading, setIsLoading] = useState(false);
     const [signer, setSigner] = useState();
     const [isSendingMoney, setIsSendingMoney] = useState(false);
     const [isReceivingMoney, setIsReceivingMoney] = useState(false);
 
     const handleLogin = async (password) => {
+        setIsLoading(true);
         try {
 
         } catch (err) {
-            console.log(err);
+            setIsLoading(false);
             toaster.danger("Invalid password");
         }
         setSigner(await getAccountDetails(password));
+        setIsLoading(false);
         setIsLoggedIn(true);
     }
     const stopSend = () => {
@@ -41,7 +44,7 @@ const WalletHome = () => {
             isSendingMoney ? <SendMoneyTemp account={signer} handleReceiveMoney={receiveMoney} handleContinue={stopSend} /> :
                 isReceivingMoney ? <ReceiveMoneyTemp address={signer.address} handleSendMoney={sendMoney} handleContinue={stopReceive} /> :
                     <WalletTemp account={signer} handleSendMoney={sendMoney} handleReceiveMoney={receiveMoney} /> :
-            <LoginTemp handleLogin={handleLogin} />
+            <LoginTemp handleLogin={handleLogin} isLoading={isLoading} />
     )
 }
 

@@ -5,7 +5,7 @@ import NavBar from "../../components/NavBar";
 import PasswordInput from "../../components/TextInputs/PasswordInput";
 import { PasswordValidate } from "../../utils.js/helpers";
 
-const LoginTemp = ({ handleLogin }) => {
+const LoginTemp = ({ handleLogin, isLoading }) => {
     const [password, setPassword] = useState('');
     const [isValidating, setIsValidating] = useState(false);
 
@@ -13,7 +13,6 @@ const LoginTemp = ({ handleLogin }) => {
         setPassword(e.target.value);
         PasswordValidate(e.target.value, setIsValidating);
     };
-
     return (
         <NavBar noButton>
             <Box w="100%">
@@ -33,7 +32,7 @@ const LoginTemp = ({ handleLogin }) => {
                         <Text my="20px">
                             Kindly input your password here!
                         </Text>
-                        <PasswordInput placeholder="*****************" value={password} onChange={handleOnChange} errors={password.length > 3 && !isValidating} />
+                        <PasswordInput placeholder="***********" value={password} onChange={handleOnChange} errors={password.length > 3 && !isValidating} />
 
                         <CustomButton
                             w="100%"
@@ -45,6 +44,8 @@ const LoginTemp = ({ handleLogin }) => {
                             testid="on-close"
                             mt="20px"
                             disabled={!isValidating}
+                            isLoading={isLoading}
+                            // href="/wallet"
                             onClick={() => handleLogin(password)}
                         >
                             Log In
