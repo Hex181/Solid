@@ -4,7 +4,6 @@ import { useNavigate } from "react-router-dom";
 import CustomButton from "../../components/CustomButton/customButton";
 import NavBar from "../../components/NavBar";
 import TextInput from "../../components/TextInputs/TextInput";
-import { saveAccount } from "../../utils.js/helpers";
 import { toaster } from "evergreen-ui";
 
 const VerifyKeyTemp = ({ phrase, handleVerified }) => {
