@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { render } from "react-dom";
 import { ChakraProvider } from "@chakra-ui/react";
@@ -12,6 +12,8 @@ import AccountContext from "../context/Account";
 
 const AppRoute = () => {
   const hasAccount = localStorage.getItem('wallet');
+
+  console.log(hasAccount);
 
   const account = {
     signer: undefined,
