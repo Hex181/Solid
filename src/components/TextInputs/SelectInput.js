@@ -25,7 +25,7 @@ const SelectInput = ({ placeholder, type, label, defaultValue, border, borderCol
       >
         {options?.map((option) => (
             <>
-                <option value={option?.address} id={option?.address}>{option?.address}</option>
+                <option value={option?.address} id={option?.address}>{option?.symbol}</option>
             </>
         ))}
       </Select>
