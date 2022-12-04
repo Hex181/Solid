@@ -2,11 +2,19 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { copyIcon } from "../../assets/svgs/svg";
 import CustomButton from "../CustomButton/customButton";
 import { CopyToClipboard } from "react-copy-to-clipboard";
-import {toaster} from "evergreen-ui";
+import { toaster } from "evergreen-ui";
+import { useEffect, useState } from "react";
+import { getNativeBalance } from "../../utils.js/helpers";
 
-const ReceiveMoneyForm = () => {
-  const wallet_addr =
-    "c5e06085e92dcac470cc7b8126bcb926dd7d8c5562fbc84022578a2b03e5ff23";
+const ReceiveMoneyForm = ({ address, handleContinue }) => {
+  const [balance, setBalance] = useState("0.0000");
+
+  useEffect(() => {
+    getNativeBalance(address).then((res) => {
+      console.log(res);
+      setBalance(res);
+    })
+  })
   return (
     <>
       <Box>
@@ -25,7 +33,7 @@ const ReceiveMoneyForm = () => {
             fontSize="14px"
           >
             <Text>Account ID</Text>
-            <CopyToClipboard text={wallet_addr} onCopy={() => toaster.success("Copied to clipborad", { id: "mess" })}>
+            <CopyToClipboard text={address} onCopy={() => toaster.success("Copied to clipborad", { id: "mess" })}>
               <Flex alignItems="center" cursor="pointer">
                 <Box>{copyIcon}</Box>
                 <Text ml="5px">Copy</Text>
@@ -33,21 +41,21 @@ const ReceiveMoneyForm = () => {
             </CopyToClipboard>
           </Flex>
           <Box bg="brand.grey" p="10px 20px" mt="10px" borderRadius="6px">
-            <Text fontWeight="bold">{wallet_addr}</Text>
+            <Text fontWeight="bold">{address}</Text>
           </Box>
         </Box>
 
         <Flex
-            alignItems="center"
-            bg="#FAFAFA"
-            borderRadius="4px"
-            mt="20px"
-            justifyContent="space-between"
-            p="20px"
-          >
-            <Text color="brand.gray">Available balance</Text>
-            <Text fontWeight="bold">0 SOLID</Text>
-          </Flex>
+          alignItems="center"
+          bg="#FAFAFA"
+          borderRadius="4px"
+          mt="20px"
+          justifyContent="space-between"
+          p="20px"
+        >
+          <Text color="brand.gray">EVMOS balance</Text>
+          <Text fontWeight="bold">{balance} EVMOS</Text>
+        </Flex>
       </Box>
       <CustomButton
         w="100%"
@@ -58,7 +66,7 @@ const ReceiveMoneyForm = () => {
         hoverColor="black"
         testid="on-close"
         mt="20px"
-        href="/wallet"
+        onClick={handleContinue}
       >
         Go back
       </CustomButton>

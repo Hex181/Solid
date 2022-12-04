@@ -4,7 +4,7 @@ import { Avatar, toaster } from "evergreen-ui";
 import { useEffect, useState } from "react";
 import { getTokensBalances } from "../../../utils.js/helpers";
 
-const Balances = ({ address }) => {
+const Balances = ({ address, handleSendMoney, handleReceiveMoney }) => {
     const [totalValue, setTotalValue] = useState(0);
     const [balances, setBalances] = useState();
 
@@ -12,11 +12,10 @@ const Balances = ({ address }) => {
     const getBalances = async () => {
         try {
             const res = await getTokensBalances(address);
-            console.log(address);
             setBalances(res);
             let value = 0;
             res.map((token) => {
-                value += token.value;
+                value += Number(token.value);
             })
             setTotalValue(value);
 
@@ -36,22 +35,18 @@ const Balances = ({ address }) => {
             <Text color="brand.gray">Portfolio Value</Text>
 
             <SimpleGrid columns={4} gap="20px" mt="60px" justifyContent="center" placeItems="center" mx={{ base: "30px", lg: "150px" }} fontSize="14px">
-                <a href="/send-money">
-                    <Box cursor="pointer">
-                        <Box bg="black" borderRadius="15px" p="15px" w="55px" textAlign="center">
-                            {sendIcon}
-                        </Box>
-                        <Text mt="5px">Send</Text>
+                <Box cursor="pointer">
+                    <Box bg="black" borderRadius="15px" p="15px" w="55px" textAlign="center" onClick={handleSendMoney}>
+                        {sendIcon}
                     </Box>
-                </a>
-                <a href="/receive-money">
-                    <Box cursor="pointer">
-                        <Box bg="black" borderRadius="15px" p="15px" w="55px" textAlign="center">
-                            {receiveIcon}
-                        </Box>
-                        <Text mt="5px">Receive</Text>
+                    <Text mt="5px">Send</Text>
+                </Box>
+                <Box cursor="pointer">
+                    <Box bg="black" borderRadius="15px" p="15px" w="55px" textAlign="center" onClick={handleReceiveMoney}>
+                        {receiveIcon}
                     </Box>
-                </a>
+                    <Text mt="5px">Receive</Text>
+                </Box>
                 <Box cursor="pointer" onClick={() => toaster.success("Coming soon !", { id: "mess" })}>
                     <Box bg="black" borderRadius="15px" p="15px" w="55px" textAlign="center">
                         {plusIcon}
@@ -78,9 +73,9 @@ const Balances = ({ address }) => {
                                 <Text>{token.name}</Text>
                             </Box>
                         </Flex>
-                        <Box ml="20px" fontSize="14px" color="brand.gray">
+                        <Box ml="20px" fontSize="14px" color="brand.gray" textAlign="right">
                             <Text fontWeight="bold">{token.balance}</Text>
-                            <Text fontWeight="bold">{token.value}</Text>
+                            <Text >{token.value} USD</Text>
                         </Box>
                     </Flex>
                     <Divider my="10px" />

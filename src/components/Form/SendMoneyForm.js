@@ -1,13 +1,30 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import CustomButton from "../CustomButton/customButton";
 import TextInput from "../TextInputs/TextInput";
+import { getNativeBalance, getTokensBalances } from "../../utils.js/helpers";
 
-const SendMoneyForm = () => {
+const SendMoneyForm = ({ account, handleContinue }) => {
   const [amount, setAmount] = useState(null);
+  const [tokens, setTokens] = useState();
+  const [selectedToken, setSelectedToken] = useState();
+  const [nativeBalance, setNativeBalance] = useState("0.0000");
+
+  useEffect(() => {
+    getNativeBalance(account.address).then((res) => setNativeBalance(res));
+    getTokensBalances(account.address).then((res) => {
+      setTokens(res);
+      console.log(res);
+    })
+  }, [])
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <>
-      <form>
+      <form onSubmit={handleSubmit}>
         <Box mx="auto" textAlign="center">
           <TextInput
             placeholder="0"
@@ -46,7 +63,9 @@ const SendMoneyForm = () => {
             p="20px"
           >
             <Text color="brand.gray">Available to Send</Text>
-            <Text fontWeight="bold">0 SOLID</Text>
+            <Text fontWeight="bold">
+              {selectedToken ? `${selectedToken.balance} ${selectedToken.symbol}` : `${nativeBalance} EVMOS`}
+            </Text>
           </Flex>
 
           <CustomButton
@@ -73,7 +92,7 @@ const SendMoneyForm = () => {
         hoverColor="black"
         testid="on-close"
         mt="20px"
-        href="/wallet"
+        onClick={handleContinue}
       >
         Cancel
       </CustomButton>

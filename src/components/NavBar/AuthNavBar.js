@@ -1,5 +1,6 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import BrandLogo from "../../assets/icons/brand-logo.svg";
+import { getAddress } from "../../utils.js/helpers";
 import CustomButton from "../CustomButton/customButton";
 
 const AuthNavBar = ({ children }) => (
@@ -22,10 +23,9 @@ const AuthNavBar = ({ children }) => (
         fontSize="12px"
         hoverColor="brand.white"
         testid="on-close"
-        href="/create-wallet"
         p={{ base: "8px 30px", lg: "8px 40px" }}
       >
-        233946272899234
+        {getAddress()}
       </CustomButton>
     </Flex>
     {children}

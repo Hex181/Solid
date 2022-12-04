@@ -1,12 +1,10 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useState, useEffect } from "react";
 import SendMoneyForm from "../../../components/Form/SendMoneyForm";
 import AuthNavBar from "../../../components/NavBar/AuthNavBar";
 
-const SendMoneyTemp = () => {
+const SendMoneyTemp = ({ account, handleReceiveMoney, handleContinue }) => {
   const [showBalance] = useState(true);
-  const navigate = useNavigate();
 
   return (
     <AuthNavBar>
@@ -33,7 +31,6 @@ const SendMoneyTemp = () => {
                 >
                   <Text
                     color={!showBalance && "brand.gray"}
-                    onClick={() => navigate('/send-money')}
                     cursor="pointer"
                     bg={!showBalance && "#FAFAFA"}
                     py="20px"
@@ -44,7 +41,7 @@ const SendMoneyTemp = () => {
                   </Text>
                   <Text
                     color={showBalance && "brand.gray"}
-                    onClick={() => navigate('/receive-money')}
+                    onClick={handleReceiveMoney}
                     cursor="pointer"
                     bg={showBalance && "#FAFAFA"}
                     py="20px"
@@ -55,7 +52,7 @@ const SendMoneyTemp = () => {
                   </Text>
                 </Flex>
                 <Box mt="60px" mb="20px" mx="auto">
-                    <SendMoneyForm />
+                  <SendMoneyForm account={account} handleContinue={handleContinue} />
                 </Box>
               </Box>
             </Flex>

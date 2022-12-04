@@ -2,11 +2,11 @@
 import { Avatar, Box, Divider, Flex, Text } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import AuthNavBar from "../../components/NavBar/AuthNavBar";
-import { getAccountDetails, getTransactions } from "../../utils.js/helpers";
+import { getTransactions } from "../../utils.js/helpers";
 import Balances from "./Balances/balances";
 import Collectibles from "./Collectibles/Collectibles";
 
-const WalletTemp = ({ account }) => {
+const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
     const [showBalance, setShowBalance] = useState(true);
     const [transactions, setTransactions] = useState();
 
@@ -24,7 +24,6 @@ const WalletTemp = ({ account }) => {
         }
     }
 
-
     useEffect(() => {
         getAllTransactions(account.address);
     }, [])
@@ -39,7 +38,9 @@ const WalletTemp = ({ account }) => {
                             <Text color={showBalance && "brand.gray"} onClick={() => setShowBalance(false)} cursor="pointer" bg={showBalance && "#FAFAFA"} py="20px" w="50%" textAlign="center">Collectibles</Text>
                         </Flex>
                         <Box mt="60px" mb="20px">
-                            {showBalance ? <Balances address={account.address} /> : <Collectibles address={account.address} />}
+                            {showBalance ?
+                                <Balances address={account.address} handleSendMoney={handleSendMoney} handleReceiveMoney={handleReceiveMoney} /> :
+                                <Collectibles address={account.address} />}
                         </Box>
                     </Box>
                     <Box w={{ base: "100%", lg: "30%" }} mt={{ base: "20px", lg: 0 }}>
@@ -48,20 +49,22 @@ const WalletTemp = ({ account }) => {
 
                             {transactions?.map((transaction) => (
                                 <>
-                                    <Flex justifyContent="space-between" mt="20px">
-                                        <Flex alignItems="center">
-                                            <Box ml="20px" fontSize="14px" color="brand.gray">
-                                                <Text fontWeight="bold">tx: {trim(transaction.hash)}</Text>
-                                                <Text>to: {trim(transaction.to)}</Text>
-                                            </Box>
+                                    <a href={`https://evm.evmos.dev/tx/${transaction.hash}`} target="_blank">
+                                        <Flex justifyContent="space-between" mt="20px">
+                                            <Flex alignItems="center">
+                                                <Box ml="20px" fontSize="14px" color="brand.gray">
+                                                    <Text fontWeight="bold">tx: {trim(transaction.hash)}</Text>
+                                                    <Text>to: {trim(transaction.to)}</Text>
+                                                </Box>
+                                            </Flex>
+                                            <Text fontWeight="bold">{transaction.value}</Text>
                                         </Flex>
-                                        <Text fontWeight="bold">{transaction.value}</Text>
-                                    </Flex>
-                                    <Divider my="10px" />
+                                        <Divider my="10px" />
+                                    </a>
                                 </>
                             ))}
                             <Box mt="30px">
-                                <a href="#">
+                                <a href={`https://evm.evmos.dev/address/${account.address}`} target="_blank">
                                     <Text as="u" fontSize="14px" >View all transactions</Text>
                                 </a>
                             </Box>
