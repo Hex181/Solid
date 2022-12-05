@@ -20,7 +20,7 @@ const Balances = ({ address, handleSendMoney, handleReceiveMoney }) => {
                 value += Number(token.value);
             })
             setTotalValue(value);
-            setIsLoading(false);
+            setIsLoading(balances && false);
 
         } catch (err) {
             console.log(err);

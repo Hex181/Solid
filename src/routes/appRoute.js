@@ -9,6 +9,8 @@ import WalletHome from "../pages/walletHome";
 import ImportWallet from "../pages/ImportWallet";
 import RecoverSeedPhrase from "../pages/RecoverSeedPhrase";
 import AccountContext from "../context/Account";
+import MarketPlace from "../pages/MarketPlace";
+import MyNFT from "../pages/MyNft";
 
 const AppRoute = () => {
   const hasAccount = localStorage.getItem('wallet');
@@ -31,6 +33,8 @@ const AppRoute = () => {
             <Route path="/create-wallet" element={<CreateWallet />} />
             <Route path="/import-wallet" element={<ImportWallet />} />
             <Route path="/recover-seed-phrase" element={<RecoverSeedPhrase />} />
+            <Route path="/market-place" element={<MarketPlace />} />
+            <Route path="/my-nfts" element={<MyNFT />} />
           </Routes>
         </ChakraProvider>
       </BrowserRouter>

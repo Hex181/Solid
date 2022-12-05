@@ -22,10 +22,12 @@ const CustomButton = ({
   fontSize,
   leftIcon,
   rightIcon,
+  mr,
+  target,
   pos
 }) => {
   return (
-    <a href={href}>
+    <a href={href} target={target}>
       <Button
         type="submit"
         background={bg}
@@ -39,6 +41,7 @@ const CustomButton = ({
         h="45px"
         mx={mx}
         margin={m}
+        mr={mr}
         w={w}
         disabled={disabled}
         mt={mt}

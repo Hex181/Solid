@@ -1,5 +1,5 @@
 import { Box, Flex, Image, Text } from "@chakra-ui/react";
-import { Button, CaretDownIcon, Menu, Popover, Position, toaster } from "evergreen-ui";
+import { Button, CaretDownIcon, Menu, Popover, Position } from "evergreen-ui";
 import { useNavigate } from "react-router-dom";
 import BrandLogo from "../../assets/icons/brand-logo.svg";
 import { getAddress } from "../../utils.js/helpers";
