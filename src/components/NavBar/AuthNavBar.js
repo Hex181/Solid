@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import BrandLogo from "../../assets/icons/brand-logo.svg";
 import { getAddress } from "../../utils.js/helpers";
 
-const AuthNavBar = ({ children }) => {
+const AuthNavBar = ({ children, setMainnet }) => {
   const navigate = useNavigate();
   return (
     <>
@@ -44,18 +44,18 @@ const AuthNavBar = ({ children }) => {
             content={
               <Menu>
                 <Menu.Group>
-                  <Menu.Item onSelect={() => toaster.notify("Share")}>
+                  <Menu.Item onSelect={() => setMainnet(true)}>
                     Mainnet
                   </Menu.Item>
                   <Menu.Divider />
-                  <Menu.Item onSelect={() => toaster.notify("Move")}>
+                  <Menu.Item onSelect={() => setMainnet(false)}>
                     Testnet
                   </Menu.Item>
                 </Menu.Group>
               </Menu>
             }
           >
-            <Button marginRight={16} iconAfter={CaretDownIcon}>{getAddress()}</Button>
+            <Button marginRight={16} iconAfter={CaretDownIcon} padding="20px">{getAddress()}</Button>
           </Popover>
         </Flex>
         {children}

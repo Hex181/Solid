@@ -9,16 +9,14 @@ const Balances = ({ address, handleSendMoney, handleReceiveMoney }) => {
     const [isLoading, setIsLoading] = useState(false);
     const [balances, setBalances] = useState();
 
-    console.log(balances);
-
     const getBalances = async () => {
         setIsLoading(true);
         try {
             const res = await getTokensBalances(address);
+            console.log(res);
             setBalances(res);
             let value = 0;
             res.map((token) => {
-                console.log(token);
                 value += Number(token.value);
             })
             setTotalValue(value);
@@ -37,8 +35,8 @@ const Balances = ({ address, handleSendMoney, handleReceiveMoney }) => {
 
     return (
         <Box w="100%" textAlign="center">
-            {isLoading ?  <Flex justifyContent="center" my="30px"><Spinner /></Flex> :
-            <Text fontSize="40px" fontWeight="bold">{totalValue} USD</Text>
+            {isLoading ? <Flex justifyContent="center" my="30px"><Spinner /></Flex> :
+                <Text fontSize="40px" fontWeight="bold">{totalValue} USD</Text>
             }
             <Text color="brand.gray">Portfolio Value</Text>
 
