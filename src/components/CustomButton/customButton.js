@@ -20,7 +20,9 @@ const CustomButton = ({
   onMouseEnter,
   onMouseOut,
   fontSize,
-  leftIcon
+  leftIcon,
+  rightIcon,
+  pos
 }) => {
   return (
     <a href={href}>
@@ -46,6 +48,8 @@ const CustomButton = ({
         onMouseEnter={onMouseEnter}
         onMouseOut={onMouseOut}
         leftIcon={leftIcon}
+        rightIcon={rightIcon}
+        position={pos}
       >
         {children}
       </Button>

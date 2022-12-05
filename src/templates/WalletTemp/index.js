@@ -30,7 +30,7 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
     }, [])
 
     return (
-        <AuthNavBar>
+        <AuthNavBar setMainnet={setMainnet}>
             <Box mx={{ base: "30px", lg: "120px" }} mt="100px">
                 <Flex w="100%" justifyContent="space-between" display={{ base: "block", lg: "flex" }}>
                     <Box boxShadow="rgba(0, 0, 0, 0.09) 0px 3px 12px" w={{ base: "100%", lg: "65%" }} borderRadius="4px" border="1px solid #9C9C9C">
