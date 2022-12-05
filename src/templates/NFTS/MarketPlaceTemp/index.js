@@ -19,8 +19,8 @@ const MarketPlaceTemp = () => {
         <Text fontWeight="bold" fontSize={{ base: "20px", lg: "45px" }}>
           NFTs
         </Text>
-        <Flex alignItems="center" justifyContent="space-between">
-            <Text>
+        <Flex alignItems="center" justifyContent="space-between" display={{ base: 'block', lg: 'flex' }}>
+            <Text fontSize={{ base: '14px', lg:'16px' }}>
             NFT collectibles, marketplaces, game projects, utilities building on
             NEAR and Aurora.
             </Text>
@@ -33,13 +33,14 @@ const MarketPlaceTemp = () => {
                     hoverColor="black"
                     testid="on-close"
                     href="/my-nfts"
+                    mt={{ base: "10px", lg: '0' }}
                 >
                     View my NFTs
                 </CustomButton>
         </Flex>
         <Divider my="30px" />
 
-        <Box my="20px" p={{ base: "10px 30px", lg: "20px 40px" }}>
+        <Box my="20px" p={{ base: "10px 10px", lg: "20px 40px" }}>
           <SimpleGrid columns={{ base: 1, lg: 4 }} gap="65px">
             {nftData.map((nft) => (
                 <Box p="20px" boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;" borderRadius="16px">

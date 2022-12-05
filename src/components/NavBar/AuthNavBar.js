@@ -55,7 +55,7 @@ const AuthNavBar = ({ children, setMainnet }) => {
               </Menu>
             }
           >
-            <Button marginRight={16} iconAfter={CaretDownIcon} padding="20px">{getAddress()}</Button>
+            <Button marginRight={16} iconAfter={CaretDownIcon} padding="20px" fontSize="12px">{getAddress()?.substring(0, 10)}</Button>
           </Popover>
         </Flex>
         {children}

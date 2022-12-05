@@ -9,12 +9,12 @@ import { nftData } from "../../../utils.js/constants";
 const MyNFTsTemp = () => {
   return (
     <AuthNavBar>
-      <Box p={{ base: "10px 30px", lg: "20px 40px" }}>
+      <Box p={{ base: "10px 20px", lg: "20px 40px" }}>
         <Text fontWeight="bold" fontSize={{ base: "20px", lg: "45px" }}>
           My NFTs
         </Text>
-        <Flex alignItems="center" justifyContent="space-between">
-          <Text>
+        <Flex alignItems="center" justifyContent="space-between" display={{ base: 'block', lg: 'flex' }}>
+          <Text fontSize={{ base: '14px', lg:'16px' }}>
             NFT collectibles, marketplaces, game projects, utilities building on
             NEAR and Aurora.
           </Text>
@@ -27,6 +27,7 @@ const MyNFTsTemp = () => {
             hoverColor="black"
             testid="on-close"
             href="/market-place"
+            mt={{ base: "10px", lg: '0' }}
           >
             Market place
           </CustomButton>
