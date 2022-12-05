@@ -1,10 +1,13 @@
-import { Box, FormLabel, Input, Text } from "@chakra-ui/react";
+import { Box, Flex, FormLabel, Input, Text } from "@chakra-ui/react";
 
-const TextInput = ({ placeholder, type, label, defaultValue, border, borderColor, color, fontSize, isReadOnly, onChange, fontWeight, w, value, step, minLength, maxLength, error, focusBorderColor, h, textAlign, focusColor }) => {
+const TextInput = ({ placeholder, type, label, defaultValue, border, borderColor, color, fontSize, isReadOnly, onChange, fontWeight, w, value, step, minLength, maxLength, error, focusBorderColor, h, textAlign, focusColor, icon }) => {
   return (
     <Box>
       <FormLabel color="brand.dark" fontSize="14px" fontWeight="300" mt="20px">
-        {label}
+        <Flex alignItems="center" justifyContent={icon ? "space-between" : 'left'}>
+          {label}
+          <Box>{icon}</Box>
+        </Flex>
       </FormLabel>
       <Input
         type={type}

@@ -5,16 +5,15 @@ import TextInput from "../TextInputs/TextInput";
 import SelectInput from "../TextInputs/SelectInput";
 import { getNativeBalance, getTokensBalances, send_token } from "../../utils.js/helpers";
 import { toaster } from "evergreen-ui";
-import { useNavigate } from "react-router-dom";
+import { transferIcon } from "../../assets/svgs/svg";
 
 const SendMoneyForm = ({ account, handleContinue }) => {
-  const navigate = useNavigate();
   const [amount, setAmount] = useState(null);
   const [isSending, setIsSending] = useState(false);
   const [tokens, setTokens] = useState();
   const [selectedToken, setSelectedToken] = useState();
   const [nativeBalance, setNativeBalance] = useState("0.0000");
-  const [receiver, setReceiver] = useState("0x82Ae380939060F72B37c1Ac82b45Ac48F62134Df");
+  const [receiver, setReceiver] = useState('');
 
   useEffect(() => {
     getNativeBalance(account.address).then((res) => setNativeBalance(res));
@@ -67,7 +66,15 @@ const SendMoneyForm = ({ account, handleContinue }) => {
             Use Max
           </CustomButton>
 
-          <SelectInput options={tokens} w="50%" label="Select Token" placeholder="Select token" onChange={(e) => setSelectedToken(e.target.value)} />
+          <SelectInput options={tokens} w="50%" label="From" placeholder="Select token" onChange={(e) => setSelectedToken(e.target.value)} />
+
+          <TextInput
+                label="To"
+                placeholder="Enter address you want to send to"
+                onChange={(e) => setReceiver(e.target.value)}
+                value={receiver}
+                icon={transferIcon}
+              />
 
           <Flex
             alignItems="center"
