@@ -7,7 +7,7 @@ const Collectibles = () => {
         <Box bg="brand.grey" py="20px" cursor="pointer" borderRadius="6px" mx="20px" textAlign="center">
             <Image src={BrandIcon} alt="brandLogo" w="30px" mx="auto" />
             <Box mt="20px" w="100%">
-                <Text color="brand.gray" mx="auto" w={{ base: '60%', lg: '100%' }} textAlign="center">You currently don't have any Collectibles yet.</Text>
+                <Text color="brand.gray" mx="auto" w={{ base: '60%', lg: '100%' }} textAlign="center">Looks like you don't have any collectibles yet.</Text>
             </Box>
 
             <CustomButton
@@ -19,8 +19,10 @@ const Collectibles = () => {
                 hoverColor="black"
                 testid="on-close"
                 mt="40px"
+                href="/market-place"
+                target="_blank"
               >
-                Explore Apps
+                View market place
               </CustomButton>
     </Box>
     )
