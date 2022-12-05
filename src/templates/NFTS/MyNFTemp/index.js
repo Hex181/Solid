@@ -41,7 +41,8 @@ const MyNFTsTemp = () => {
                 boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;"
                 borderRadius="16px"
               >
-                <Flex alignItems="center">
+                   <Image src={nft.image_url} h="150px" borderTopRightRadius="16px" borderTopLeftRadius="16px" objectFit="cover" w="100%" alt="img" />
+                <Flex alignItems="center" mt="20px">
                   <Avatar
                     name="Ryan Gig"
                     size="40px"
