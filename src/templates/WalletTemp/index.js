@@ -1,5 +1,6 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import { Box, Divider, Flex, Text } from "@chakra-ui/react";
+import { Spinner } from "evergreen-ui";
 import { useEffect, useState } from "react";
 import AuthNavBar from "../../components/NavBar/AuthNavBar";
 import { getTransactions } from "../../utils.js/helpers";
@@ -9,6 +10,9 @@ import Collectibles from "./Collectibles/Collectibles";
 const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
     const [showBalance, setShowBalance] = useState(true);
     const [transactions, setTransactions] = useState();
+    const [isLoadingTrx, setIsLoadingTrx] = useState(false);
+
+    console.log(isLoadingTrx);
 
 
     const trim = (str) => {
@@ -16,11 +20,15 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
     }
 
     const getAllTransactions = async (addr) => {
+        // setIsLoadingTrx(true);
         try {
             const res = await getTransactions(addr);
+            console.log(res);
             setTransactions(res);
+            setIsLoadingTrx(false)
         } catch (err) {
             console.log(err);
+            // setIsLoadingTrx(false);
         }
     }
 
@@ -46,23 +54,27 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
                     <Box w={{ base: "100%", lg: "30%" }} mt={{ base: "20px", lg: 0 }}>
                         <Box boxShadow="rgba(0, 0, 0, 0.09) 0px 3px 12px" w="100%" borderRadius="4px" border="1px solid #9C9C9C" p="20px">
                             <Text fontSize="25px" fontWeight="bold">Recent Activities</Text>
-
-                            {transactions?.map((transaction) => (
-                                <>
-                                    <a href={`https://evm.evmos.dev/tx/${transaction.hash}`} target="_blank" rel="noreferrer">
-                                        <Flex justifyContent="space-between" mt="20px">
-                                            <Flex alignItems="center">
-                                                <Box ml="20px" fontSize="14px" color="brand.gray">
-                                                    <Text fontWeight="bold">tx: {trim(transaction.hash)}</Text>
-                                                    <Text>to: {trim(transaction.to)}</Text>
-                                                </Box>
+                            {/* {isLoadingTrx ? <Flex justifyContent="center"><Spinner /></Flex>
+                            : */}
+                            <>
+                                {transactions?.map((transaction) => (
+                                    <>
+                                        <a href={`https://evm.evmos.dev/tx/${transaction.hash}`} target="_blank" rel="noreferrer">
+                                            <Flex justifyContent="space-between" mt="20px">
+                                                <Flex alignItems="center">
+                                                    <Box ml="20px" fontSize="14px" color="brand.gray">
+                                                        <Text fontWeight="bold">tx: {trim(transaction.hash)}</Text>
+                                                        <Text>to: {trim(transaction.to)}</Text>
+                                                    </Box>
+                                                </Flex>
+                                                <Text fontWeight="bold">{transaction.value}</Text>
                                             </Flex>
-                                            <Text fontWeight="bold">{transaction.value}</Text>
-                                        </Flex>
-                                        <Divider my="10px" />
-                                    </a>
-                                </>
-                            ))}
+                                            <Divider my="10px" />
+                                        </a>
+                                    </>
+                                ))}
+                            </>
+                            {/* } */}
                             <Box mt="30px">
                                 <a href={`https://evm.evmos.dev/address/${account.address}`} target="_blank" rel="noreferrer">
                                     <Text as="u" fontSize="14px" >View all transactions</Text>
