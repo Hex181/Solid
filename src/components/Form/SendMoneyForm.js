@@ -27,9 +27,11 @@ const SendMoneyForm = ({ account, handleContinue }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const res = await send_token('0x3Ea16A3E1FD39690822C8cDF764719ECbd047f14', amount, receiver, account, setIsSending);
+    const res = await send_token(selectedToken, amount, receiver, account, setIsSending);
     toaster.success(`Token sent successfully!`, { id: "mess" });
-    console.log(res);
+    setIsSending(false);
+    const receipt = await res.wait();
+    console.log({ receipt });
   }
 
   return (
@@ -49,7 +51,7 @@ const SendMoneyForm = ({ account, handleContinue }) => {
             textAlign="center"
             type="number"
             value={amount}
-            
+
             onChange={(e) => setAmount(e.target.value)}
           />
           <Text color="brand.gray">- USD</Text>
@@ -66,15 +68,15 @@ const SendMoneyForm = ({ account, handleContinue }) => {
             Use Max
           </CustomButton>
 
-          <SelectInput options={tokens} w="50%" label="From" placeholder="Select token" onChange={(e) => setSelectedToken(e.target.value)} />
+          <SelectInput options={tokens} w="50%" label="From" placeholder="Select Token" onChange={(e) => setSelectedToken(e.target.value)} />
 
           <TextInput
-                label="To"
-                placeholder="Enter address you want to send to"
-                onChange={(e) => setReceiver(e.target.value)}
-                value={receiver}
-                icon={transferIcon}
-              />
+            label="To"
+            placeholder="Enter address you want to send to"
+            onChange={(e) => setReceiver(e.target.value)}
+            value={receiver}
+            icon={transferIcon}
+          />
 
           <Flex
             alignItems="center"
@@ -100,7 +102,7 @@ const SendMoneyForm = ({ account, handleContinue }) => {
             testid="on-close"
             mt="20px"
             isLoading={isSending}
-            disabled={!amount || !selectedToken}
+            disabled={!amount}
           >
             Send
           </CustomButton>

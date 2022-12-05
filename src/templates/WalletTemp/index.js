@@ -9,6 +9,7 @@ import Collectibles from "./Collectibles/Collectibles";
 const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
     const [showBalance, setShowBalance] = useState(true);
     const [transactions, setTransactions] = useState();
+    const [mainnet, setMainnet] = useState(true);
 
 
     const trim = (str) => {
@@ -49,11 +50,12 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
 
                             {transactions?.map((transaction) => (
                                 <>
-                                    <a href={`https://evm.evmos.dev/tx/${transaction.hash}`} target="_blank" rel="noreferrer">
+                                    <a href={`https://evm.evmos.${mainnet ? "org" : "dev"}/tx/${transaction.hash}`} target="_blank" rel="noreferrer">
                                         <Flex justifyContent="space-between" mt="20px">
                                             <Flex alignItems="center">
                                                 <Box ml="20px" fontSize="14px" color="brand.gray">
-                                                    <Text fontWeight="bold">tx: {trim(transaction.hash)}</Text>
+                                                    <Text fontWeight="bold">Tx: {trim(transaction.hash)}</Text>
+                                                    <Text>from: {trim(transaction.from)}</Text>
                                                     <Text>to: {trim(transaction.to)}</Text>
                                                 </Box>
                                             </Flex>
@@ -64,7 +66,7 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
                                 </>
                             ))}
                             <Box mt="30px">
-                                <a href={`https://evm.evmos.dev/address/${account.address}`} target="_blank" rel="noreferrer">
+                                <a href={`https://evm.evmos.${mainnet ? "org" : "dev"}/address/${account.address}`} target="_blank" rel="noreferrer">
                                     <Text as="u" fontSize="14px" >View all transactions</Text>
                                 </a>
                             </Box>
