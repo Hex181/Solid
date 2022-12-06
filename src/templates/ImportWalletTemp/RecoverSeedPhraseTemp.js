@@ -18,7 +18,7 @@ const RecoverSeedPhraseTemp = () => {
     if (isValidSeedPhrase(phraseKey)) {
       setIsValid(true);
     } else {
-      toaster.danger("Invalid seed phrase");
+      toaster.danger("Invalid seed phrase", { id: "mess" });
     }
   }
 
@@ -67,6 +67,7 @@ const RecoverSeedPhraseTemp = () => {
                 Import Wallet
               </CustomButton>
             </Box>
+            <Text textAlign="center" mt='20px' fontSize={{ base: "12px", lg: "16px" }} color="brand.gray">Already have a walllet ? <a href="/"><Text as="u">Sign In</Text></a></Text>
           </Box>
           <Box color="brand.gray" textAlign="center">
             <Text>Don't have a wallet ?</Text>

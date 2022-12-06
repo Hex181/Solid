@@ -9,7 +9,6 @@ const NavBar = ({ children, noButton }) => (
         <Image src={BrandLogo} alt="brand-logo" width={{ base: "60%", lg: "100%" }} />
       </a>
       {!noButton &&
-      
         <CustomButton
           width={{ base: "80px", lg: "180px" }}
           bg="brand.white"

@@ -50,6 +50,7 @@ const LoginTemp = ({ handleLogin, isLoading }) => {
                         >
                             Log In
                         </CustomButton>
+                        <Text textAlign="center" mt='20px' fontSize={{ base: "12px", lg: "16px" }}>Forgot your password ? <a href="/recover-seed-phrase"><Text as="u">Import existing wallet</Text></a></Text>
                     </Box>
                 </Box>
                 <Box color="brand.gray" textAlign="center">
