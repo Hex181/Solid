@@ -8,7 +8,7 @@ const SendMoneyTemp = ({ account, handleReceiveMoney, handleContinue }) => {
 
   return (
     <AuthNavBar>
-      <Box w="100%" pt='130px' pb="30px">
+      <Box w="100%" pt='100px' pb="30px">
         <Box
           w="40%"
           mx="auto"
