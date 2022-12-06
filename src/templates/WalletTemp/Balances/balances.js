@@ -6,7 +6,7 @@ const Balances = ({ balances, totalValue, handleSendMoney, handleReceiveMoney })
 
     return (
         <Box w="100%" textAlign="center">
-            {!totalValue ? <Flex justifyContent="center" my="30px"><Spinner /></Flex> :
+            {totalValue == undefined ? <Flex justifyContent="center" my="30px"><Spinner /></Flex> :
                 <Text fontSize="40px" fontWeight="bold">{totalValue} USD</Text>
             }
             <Text color="brand.gray">Portfolio Value</Text>

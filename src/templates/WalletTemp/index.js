@@ -10,7 +10,7 @@ import Collectibles from "./Collectibles/Collectibles";
 const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
     const [showBalance, setShowBalance] = useState(true);
     const [balances, setBalances] = useState();
-    const [totalValue, setTotalValue] = useState(0);
+    const [totalValue, setTotalValue] = useState();
     const [transactions, setTransactions] = useState();
     const [mainnet, setMainnet] = useState(true);
     const [isLoadingTrx, setIsLoadingTrx] = useState(false);
