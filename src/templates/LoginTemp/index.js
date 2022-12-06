@@ -17,14 +17,14 @@ const LoginTemp = ({ handleLogin, isLoading }) => {
         <NavBar noButton>
             <Box w="100%">
                 <Box
-                    w="40%"
+                    w={{ base: "80%", lg: "40%" }}
                     mx="auto"
                     my="30px"
                     p="20px"
                     boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
                     borderRadius="8px"
                 >
-                    <Text fontSize="40px" fontWeight="bold">
+                    <Text fontSize={{ base: "25px", lg: "40px" }} fontWeight="bold">
                         Login with Password
                     </Text>
                     <Divider />

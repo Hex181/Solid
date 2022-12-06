@@ -9,12 +9,12 @@ import { nftData } from "../../../utils.js/constants";
 const MyNFTsTemp = () => {
   return (
     <AuthNavBar>
-      <Box p={{ base: "10px 30px", lg: "20px 40px" }}>
+      <Box p={{ base: "10px 20px", lg: "20px 40px" }}>
         <Text fontWeight="bold" fontSize={{ base: "20px", lg: "45px" }}>
           My NFTs
         </Text>
-        <Flex alignItems="center" justifyContent="space-between">
-          <Text>
+        <Flex alignItems="center" justifyContent="space-between" display={{ base: 'block', lg: 'flex' }}>
+          <Text fontSize={{ base: '14px', lg:'16px' }}>
             NFT collectibles, marketplaces, game projects, utilities building on
             NEAR and Aurora.
           </Text>
@@ -27,6 +27,7 @@ const MyNFTsTemp = () => {
             hoverColor="black"
             testid="on-close"
             href="/market-place"
+            mt={{ base: "10px", lg: '0' }}
           >
             Market place
           </CustomButton>
@@ -41,7 +42,8 @@ const MyNFTsTemp = () => {
                 boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;"
                 borderRadius="16px"
               >
-                <Flex alignItems="center">
+                   <Image src={nft.image_url} h="150px" borderTopRightRadius="16px" borderTopLeftRadius="16px" objectFit="cover" w="100%" alt="img" />
+                <Flex alignItems="center" mt="20px">
                   <Avatar
                     name="Ryan Gig"
                     size="40px"
