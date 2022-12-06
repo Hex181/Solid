@@ -15,7 +15,7 @@ const MarketPlaceTemp = () => {
 
   return (
     <AuthNavBar>
-      <Box p={{ base: "10px 30px", lg: "20px 40px" }}>
+      <Box p={{ base: "10px 30px", lg: "120px 40px" }}>
         <Text fontWeight="bold" fontSize={{ base: "20px", lg: "45px" }}>
           NFTs
         </Text>

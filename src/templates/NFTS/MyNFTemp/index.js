@@ -9,7 +9,7 @@ import { nftData } from "../../../utils.js/constants";
 const MyNFTsTemp = () => {
   return (
     <AuthNavBar>
-      <Box p={{ base: "10px 20px", lg: "20px 40px" }}>
+      <Box p={{ base: "10px 20px", lg: "120px 40px" }}>
         <Text fontWeight="bold" fontSize={{ base: "20px", lg: "45px" }}>
           My NFTs
         </Text>

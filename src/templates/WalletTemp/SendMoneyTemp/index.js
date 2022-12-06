@@ -1,5 +1,5 @@
 import { Box, Flex, Text } from "@chakra-ui/react";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import SendMoneyForm from "../../../components/Form/SendMoneyForm";
 import AuthNavBar from "../../../components/NavBar/AuthNavBar";
 
@@ -8,11 +8,11 @@ const SendMoneyTemp = ({ account, handleReceiveMoney, handleContinue }) => {
 
   return (
     <AuthNavBar>
-      <Box w="100%">
+      <Box w="100%" pt='130px' pb="30px">
         <Box
           w="40%"
           mx="auto"
-          my="30px"
+          pt="120px"
           p="20px"
           boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
           borderRadius="8px"

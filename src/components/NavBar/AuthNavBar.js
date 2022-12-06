@@ -2,6 +2,7 @@ import { Box, Flex, Image, Text } from "@chakra-ui/react";
 import { Button, CaretDownIcon, Menu, Popover, Position } from "evergreen-ui";
 import { useNavigate } from "react-router-dom";
 import BrandLogo from "../../assets/icons/brand-logo.svg";
+import { walletIcon } from "../../assets/svgs/svg";
 import { getAddress } from "../../utils.js/helpers";
 
 const AuthNavBar = ({ children, setMainnet }) => {
@@ -16,6 +17,9 @@ const AuthNavBar = ({ children, setMainnet }) => {
           p={{ base: "10px 30px", lg: "20px 40px" }}
           w="100%"
           py="20px"
+          pos="fixed"
+          zIndex="999"
+          bg="white"
         >
           <Flex
             alignItems="center"
@@ -29,15 +33,16 @@ const AuthNavBar = ({ children, setMainnet }) => {
                 width={{ base: "60%", lg: "100%" }}
               />
             </a>
-            <Text
-              cursor="pointer"
-              display={{ base: "none", lg: "flex" }}
-              _hover={{ color: "#81B3FF" }}
-              style={{ transition: "all 1.2s ease" }}
-              onClick={() => navigate("/")}
-            >
-              Wallet
-            </Text>
+            <Flex cursor="pointer" onClick={() => navigate("/")}>
+              <Box mr="5px">{walletIcon}</Box>
+              <Text
+                display={{ base: "none", lg: "flex" }}
+                _hover={{ color: "#81B3FF" }}
+                style={{ transition: "all 1.2s ease" }}
+              >
+                Wallet
+              </Text>
+            </Flex>
           </Flex>
           <Popover
             position={Position.BOTTOM_LEFT}
@@ -55,7 +60,14 @@ const AuthNavBar = ({ children, setMainnet }) => {
               </Menu>
             }
           >
-            <Button marginRight={16} iconAfter={CaretDownIcon} padding="20px" fontSize="12px">{getAddress()?.substring(0, 10)}</Button>
+            <Button
+              marginRight={16}
+              iconAfter={CaretDownIcon}
+              padding="20px"
+              fontSize="12px"
+            >
+              {getAddress()?.substring(0, 10)}
+            </Button>
           </Popover>
         </Flex>
         {children}

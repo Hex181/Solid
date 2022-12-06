@@ -4,7 +4,7 @@ import CustomButton from "../CustomButton/customButton";
 
 const NavBar = ({ children, noButton }) => (
   <Box>
-    <Flex alignItems="center" justifyContent="space-between" boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px" p={{ base: "10px 30px", lg: "20px 40px" }} w="100%" py="20px">
+    <Flex alignItems="center" justifyContent="space-between" boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px" p={{ base: "20px 30px", lg: "20px 40px" }} w="100%" py="30px" bg="white">
       <a href="/">
         <Image src={BrandLogo} alt="brand-logo" width={{ base: "60%", lg: "100%" }} />
       </a>
