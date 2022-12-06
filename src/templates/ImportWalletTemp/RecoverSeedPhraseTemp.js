@@ -4,16 +4,31 @@ import CustomButton from "../../components/CustomButton/customButton";
 import NavBar from "../../components/NavBar";
 import TextAreaInput from "../../components/TextInputs/TextAreaInput";
 import { useNavigate } from "react-router-dom";
+import CreatePasswordTemp from "../CreateWalletTemp/CreatePasswordTemp";
+import { isValidSeedPhrase, saveAccount } from "../../utils.js/helpers";
+import { toaster } from "evergreen-ui";
 
 const RecoverSeedPhraseTemp = () => {
   const navigate = useNavigate();
-    const [phraseKey, setPhraseKey] = useState('');
-    const arrkey = phraseKey.split(' ');
-    const handleSubmit = () => {
-      navigate('/recover-seed-phrase');
+  const [isValid, setIsValid] = useState(false);
+  const [phraseKey, setPhraseKey] = useState('');
+  const [isCreatingAcct, setIsCreatingAcct] = useState(null);
+
+  const handleSubmit = () => {
+    if (isValidSeedPhrase(phraseKey)) {
+      setIsValid(true);
+    } else {
+      toaster.danger("Invalid seed phrase");
     }
-    return (
-        <NavBar>
+  }
+
+  const createWallet = (password) => {
+    saveAccount(phraseKey.split(' '), password, setIsCreatingAcct, navigate);
+  }
+
+  return (
+    isValid ? < CreatePasswordTemp createWallet={createWallet} isCreatingAcct={isCreatingAcct} /> :
+      <NavBar>
         <Box w="100%">
           <Box
             w={{ base: "80%", lg: "40%" }}
@@ -36,7 +51,7 @@ const RecoverSeedPhraseTemp = () => {
               <form onSubmit={handleSubmit}>
                 <TextAreaInput label="Paraphrase key (12 word)" placeholder="ball account just ..." value={phraseKey} onChange={(e) => setPhraseKey(e.target.value)} />
               </form>
-  
+
               <CustomButton
                 w="100%"
                 bg="black"
@@ -46,7 +61,8 @@ const RecoverSeedPhraseTemp = () => {
                 hoverColor="black"
                 testid="on-close"
                 mt="40px"
-                disabled={arrkey.length < 11}
+                onClick={() => handleSubmit()}
+              // disabled={arrkey.length < 11}
               >
                 Import Wallet
               </CustomButton>
@@ -55,14 +71,14 @@ const RecoverSeedPhraseTemp = () => {
           <Box color="brand.gray" textAlign="center">
             <Text>Don't have a wallet ?</Text>
             <a href="/create-wallet">
-                <Text as="u" mt="10px" cursor="pointer">
+              <Text as="u" mt="10px" cursor="pointer">
                 Create a Wallet
-                </Text>
+              </Text>
             </a>
           </Box>
         </Box>
       </NavBar>
-    )
+  )
 };
 
 export default RecoverSeedPhraseTemp;

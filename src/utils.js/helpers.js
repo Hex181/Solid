@@ -53,6 +53,10 @@ export const getAddress = () => {
     }
 }
 
+export const isValidSeedPhrase = (phrase) => {
+    return ethers.utils.isValidMnemonic(phrase);
+}
+
 export async function getTransactions(address) {
     try {
         const res = await fetch(`https://api.covalenthq.com/v1/${chainId}/address/${address}/transactions_v2/?quote-currency=USD&format=JSON&block-signed-at-asc=false&no-logs=false&page-size=10&key=${key}`);
