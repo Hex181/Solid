@@ -33,6 +33,7 @@ const MarketPlaceTemp = ({ account, handleCloseMarketPlace }) => {
 
   const handleProceed = () => {
     onClose(); setDisplayNoti(true);
+    localStorage.setItem('purchased_tictac', true);
 
     setTimeout(() => {
       setDisplayNoti(false);

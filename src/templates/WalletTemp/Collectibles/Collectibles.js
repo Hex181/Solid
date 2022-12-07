@@ -10,16 +10,23 @@ const nfts = [{
     description: "This NFT is given to early adopters of Solid wallet",
     image: image,
     price: 200
-}
-]
+},
+    {
+        name: "Tic Tac",
+        image: "https://gametable.org/res/images/og/tabletop-tic-tac-toe-og-1200x1200.png",
+        description: "Play-to-Earn mobile strategy game on SOLID protocol",
+        price: "10EVMOS"
+      }
+];
 
 const Collectibles = ({ address, collectibles, showMarketPlace }) => {
+    const isBought = localStorage.getItem('purchased_tictac');
     console.log({ collectibles })
     return (
         <Box bg="brand.grey" py="20px" cursor="pointer" borderRadius="6px" mx="20px" textAlign="center">
             <Image src={BrandIcon} alt="brandLogo" w="30px" mb="40px" mx="auto" />
             <SimpleGrid columns={{ base: 1, lg: 2 }} gap="30px" mx="30px">
-                {nfts.map((nft) => {
+                {nfts.slice(0, isBought ? 2 : 1).map((nft) => {
                     return (
                         <Box
                             p="20px"
