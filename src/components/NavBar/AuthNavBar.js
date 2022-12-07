@@ -39,7 +39,7 @@ const AuthNavBar = ({ children, setMainnet }) => {
               Wallet
             </Text>
           </Flex>
-          <Popover
+          {/* <Popover
             position={Position.BOTTOM_LEFT}
             content={
               <Menu>
@@ -56,7 +56,7 @@ const AuthNavBar = ({ children, setMainnet }) => {
             }
           >
             <Button marginRight={16} iconAfter={CaretDownIcon} padding="20px" fontSize="12px">{getAddress()?.substring(0, 10)}</Button>
-          </Popover>
+          </Popover> */}
         </Flex>
         {children}
       </Box>

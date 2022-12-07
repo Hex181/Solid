@@ -12,7 +12,7 @@ const SendMoneyForm = ({ account, handleContinue }) => {
   const [isSending, setIsSending] = useState(false);
   const [tokens, setTokens] = useState();
   const [selectedToken, setSelectedToken] = useState();
-  const [nativeBalance, setNativeBalance] = useState("0.0000");
+  const [nativeBalance, setNativeBalance] = useState("0.00");
   const [receiver, setReceiver] = useState('');
 
   useEffect(() => {

@@ -1,10 +1,10 @@
 import { ethers } from 'ethers';
 import { toaster } from 'evergreen-ui';
 const mainneturl = "https://eth.bd.evmos.org:8545";
-const testneturl = "https://eth.bd.evmos.dev:8545";
+// const testneturl = "https://eth.bd.evmos.dev:8545";
 let url = mainneturl;
 const provider = new ethers.providers.JsonRpcProvider(url);
-const testnetChainId = "9000"
+// const testnetChainId = "9000"
 const mainnetChainId = "9001"
 let chainId = mainnetChainId;
 
@@ -74,22 +74,33 @@ export async function getTransactions(address) {
 }
 
 export async function getTokensBalances(address) {
-    const res = await fetch(`https://api.covalenthq.com/v1/${chainId}/address/${address}/balances_v2/?quote-currency=USD&format=JSON&nft=false&no-nft-fetch=false&key=${key}`)
+    const res = await fetch(`https://api.covalenthq.com/v1/${chainId}/address/${address}/balances_v2/?quote-currency=USD&format=JSON&nft=true&no-nft-fetch=true&key=${key}`)
+    console.log({ res })
     const balances = (await res.json()).data.items;
-    const modifiedBalances = balances.map((b) => {
+    const modifiedBalances = balances.map((t) => {
         return {
-            address: b.contract_address,
-            name: b.contract_name,
-            symbol: b.contract_ticker_symbol,
-            logo: b.logo_url,
-            decimals: b.contract_decimals,
-            balance: parseFloat((b.balance / 10 ** b.contract_decimals).toFixed(4)),
-            rate: b.quote_rate,
-            value: parseFloat(b.quote.toFixed(2))
+            address: t.contract_address,
+            name: t.contract_name,
+            symbol: t.contract_ticker_symbol,
+            logo: t.logo_url,
+            type: t.type,
+            nft_data: t.nft_data,
+            decimals: t.contract_decimals,
+            balance: parseFloat((t.balance / 10 ** t.contract_decimals).toFixed(4)),
+            rate: t.quote_rate,
+            value: parseFloat(t.quote.toFixed(2))
         }
     });
-    // console.log({ modifiedBalances })
+    console.log({ modifiedBalances })
     return modifiedBalances;
+}
+
+export async function getExternalMetadata(contractAddress, tokenId) {
+    // const res = await fetch(`https://api.covalenthq.com/v1/${chainId}/tokens/${contractAddress}/nft_metadata/${tokenId}/?quote-currency=USD&format=JSON&key=${key}`);
+    const res = await fetch(`https://api.covalenthq.com/v1/${chainId}/tokens/0x1EcC5d009663979889ddAD7f1D31f4d913E5B736/nft_metadata/0/?quote-currency=USD&format=JSON&key=ckey_c5e2191c3ca149f69fa06d6dd0e`);
+    const nftMetadata = (await res.json()).data.items[0];
+    console.log(nftMetadata);
+    return { nftMetadata }
 }
 
 export async function send_token(
