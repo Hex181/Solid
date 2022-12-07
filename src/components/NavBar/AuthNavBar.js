@@ -3,7 +3,6 @@ import { Button, CaretDownIcon, Menu, Popover, Position } from "evergreen-ui";
 import { useNavigate } from "react-router-dom";
 import BrandLogo from "../../assets/icons/brand-logo.svg";
 import { walletIcon } from "../../assets/svgs/svg";
-import { getAddress } from "../../utils.js/helpers";
 
 const AuthNavBar = ({ children, setMainnet }) => {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ const AuthNavBar = ({ children, setMainnet }) => {
           w="100%"
           py="20px"
           pos="fixed"
-          zIndex="999"
+          zIndex="10"
           bg="white"
         >
           <Flex
