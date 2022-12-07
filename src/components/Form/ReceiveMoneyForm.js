@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { getNativeBalance } from "../../utils.js/helpers";
 
 const ReceiveMoneyForm = ({ address, handleContinue }) => {
-  const [balance, setBalance] = useState("0.0000");
+  const [balance, setBalance] = useState("0.00");
 
   useEffect(() => {
     getNativeBalance(address).then((res) => {

@@ -3,13 +3,14 @@ import { Box, Divider, Flex, Text } from "@chakra-ui/react";
 import { Spinner, toaster } from "evergreen-ui";
 import { useEffect, useState } from "react";
 import AuthNavBar from "../../components/NavBar/AuthNavBar";
-import { getTransactions, getTokensBalances } from "../../utils.js/helpers";
+import { getTransactions, getTokensBalances, getExternalMetadata } from "../../utils.js/helpers";
 import Balances from "./Balances/balances";
 import Collectibles from "./Collectibles/Collectibles";
 
-const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
+const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney, showMarketPlace }) => {
     const [showBalance, setShowBalance] = useState(true);
     const [balances, setBalances] = useState();
+    const [collectibles, setCollectibles] = useState();
     const [totalValue, setTotalValue] = useState();
     const [transactions, setTransactions] = useState();
     const [mainnet, setMainnet] = useState(true);
@@ -22,13 +23,31 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
 
     const getBalances = async () => {
         try {
+            const erc20Balances = [];
+            let nftBalances = [];
             const res = await getTokensBalances(account.address);
-            // console.log(res);
-            setBalances(res);
+            console.log({ res });
             let value = 0;
-            res.map((token) => {
-                value += Number(token.value);
+            res.forEach(token => {
+                if (token.type == "nft") {
+                    nftBalances.push(token);
+                } else {
+                    erc20Balances.push(token)
+                    value += Number(token.value);
+                }
+            });
+            setBalances(erc20Balances);
+            //get external nft datas
+            const nfts = []
+            nftBalances.forEach(async n => {
+                const id = n.nft_data[0].token_id;
+                console.log({ id })
+                const res = await getExternalMetadata(n.address, id);
+                console.log({ res });
+                nfts.push(res);
             })
+            setCollectibles(nfts);
+            console.log({ erc20Balances, nftBalances });
             setTotalValue(value);
 
         } catch (err) {
@@ -71,7 +90,7 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
                                     handleSendMoney={handleSendMoney}
                                     handleReceiveMoney={handleReceiveMoney}
                                 /> :
-                                <Collectibles address={account.address} />}
+                                <Collectibles address={account.address} collectibles={collectibles} showMarketPlace={showMarketPlace} />}
                         </Box>
                     </Box>
                     <Box w={{ base: "100%", lg: "30%" }} mt={{ base: "20px", lg: 0 }}>
@@ -87,8 +106,8 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney }) => {
                                                     <Flex alignItems="center">
                                                         <Box ml="20px" fontSize="14px" color="brand.gray">
                                                             <Text fontWeight="bold">Tx: {trim(transaction.hash)}</Text>
-                                                            <Text>from: {trim(transaction.from)}</Text>
-                                                            <Text>to: {trim(transaction.to)}</Text>
+                                                            {transaction.from && <Text>from: {trim(transaction.from)}</Text>}
+                                                            {transaction.to && <Text>to: {trim(transaction.to)}</Text>}
                                                         </Box>
                                                     </Flex>
                                                     <Text fontWeight="bold">{transaction.value}</Text>

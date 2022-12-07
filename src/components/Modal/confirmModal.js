@@ -16,7 +16,7 @@ const ConfirmModal = ({ isOpen, onClose, header, handleProceed, content }) => {
     <>
       <Modal isOpen={isOpen} onClose={onClose} size="xl">
         <ModalOverlay />
-        <ModalContent>
+        <ModalContent zIndex="1500">
           <ModalHeader>{header}</ModalHeader>
           <ModalCloseButton />
           <ModalBody>
