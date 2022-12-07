@@ -24,13 +24,13 @@ const Balances = ({ balances, totalValue, handleSendMoney, handleReceiveMoney })
                     </Box>
                     <Text mt="5px">Receive</Text>
                 </Box>
-                <Box cursor="pointer" onClick={() => toaster.success("Coming soon !", { id: "mess" })}>
+                <Box cursor="pointer" onClick={() => toaster.success("Coming soon !", { id: "mess", duration: 1 })}>
                     <Box bg="black" borderRadius="15px" p="15px" w="55px" textAlign="center">
                         {plusIcon}
                     </Box>
                     <Text mt="5px">Top Up</Text>
                 </Box>
-                <Box cursor="pointer" onClick={() => toaster.success("Coming soon !", { id: "mess" })}>
+                <Box cursor="pointer" onClick={() => toaster.success("Coming soon !", { id: "mess", duration: 1 })}>
                     <Box bg="black" borderRadius="15px" p="15px" w="55px" textAlign="center">
                         {swapIcon}
                     </Box>
