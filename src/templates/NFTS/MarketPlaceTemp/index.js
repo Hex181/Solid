@@ -21,21 +21,36 @@ const nftData = [
     image_url: image,
     price: 200
   }
+];
 
-]
 
 const MarketPlaceTemp = ({ account, handleCloseMarketPlace }) => {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [nftClicked, setNFTClicked] = useState('');
   const [priceClicked, setPriceClicked] = useState('');
 
+  const [displayNoti, setDisplayNoti] = useState(false);
+
+  const handleProceed = () => {
+    onClose(); setDisplayNoti(true);
+
+    setTimeout(() => {
+      setDisplayNoti(false);
+    }, 3000);
+  }
+
   return (
     <AuthNavBar>
-      <Box p={{ base: "10px 30px", lg: "20px 40px" }}>
+        {displayNoti &&
+        <Box bg="black" p="10px" pt="80px" textAlign="center" color="white" style={{ transition: "all 1.2s ease" }} pos="absolute" w="100%" mb="20px">
+          <Text>Successful!</Text>
+        </Box>
+        }
+      <Box p={{ base: "10px 30px", lg: "120px 40px" }}>
         <Text fontWeight="bold" fontSize={{ base: "20px", lg: "45px" }}>
           NFTs
         </Text>
-        <Flex alignItems="center" justifyContent="space-between" display={{ base: 'block', lg: 'flex' }}>
+        <Flex alignItems="center" justifyContent="space-between" display={{ base: 'block', lg: 'flex' }} mt="-10px">
           <Text fontSize={{ base: '14px', lg: '16px' }}>
             NFT collectibles, marketplaces, game projects, utilities building on
             EVMOS.
@@ -60,7 +75,7 @@ const MarketPlaceTemp = ({ account, handleCloseMarketPlace }) => {
           <SimpleGrid columns={{ base: 1, lg: 4 }} gap="65px">
             {nftData.map((nft) => (
               <Box p="20px" boxShadow="rgba(0, 0, 0, 0.05) 0px 6px 24px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px;" borderRadius="16px">
-                <Image src={nft.image_url} borderTopRightRadius="16px" borderTopLeftRadius="16px" objectFit="cover" w="100%" alt="img" />
+                <Image src={nft.image_url} borderTopRightRadius="16px" borderTopLeftRadius="16px" h="200px" objectFit="cover" w="100%" alt="img" />
                 <Flex alignItems="center" mt="20px">
                   <Box ml="20px">
                     <Text fontWeight="bold" fontSize="20px">
@@ -88,7 +103,7 @@ const MarketPlaceTemp = ({ account, handleCloseMarketPlace }) => {
                   hoverColor="black"
                   testid="on-close"
                   mt="20px"
-                  onClick={() => { onOpen(); setNFTClicked(nft.title); setPriceClicked(nft.price) }}
+                  onClick={() => { onOpen(); setNFTClicked(nft.name); setPriceClicked(nft.price) }}
                 >
                   Buy Now
                 </CustomButton>
@@ -102,7 +117,7 @@ const MarketPlaceTemp = ({ account, handleCloseMarketPlace }) => {
         header="Confirm NFT Purchase"
         isOpen={isOpen}
         onClose={onClose}
-        handleProceed={() => { toaster.notify("Buy here", { id: "mess" }); onClose(); }}
+        handleProceed={handleProceed}
         content={`Are you sure you want to purchase ${nftClicked} for ${priceClicked} ?`}
       />
     </AuthNavBar>

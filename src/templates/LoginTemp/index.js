@@ -15,7 +15,7 @@ const LoginTemp = ({ handleLogin, isLoading }) => {
     };
     return (
         <NavBar noButton>
-            <Box w="100%">
+            <Box w="100%" pt="100px">
                 <Box
                     w={{ base: "80%", lg: "40%" }}
                     mx="auto"
@@ -50,9 +50,10 @@ const LoginTemp = ({ handleLogin, isLoading }) => {
                         >
                             Log In
                         </CustomButton>
+                        <Text textAlign="center" mt='20px' fontSize={{ base: "12px", lg: "16px" }}>Forgot your password ? <a href="/recover-seed-phrase"><Text as="u">Import existing wallet</Text></a></Text>
                     </Box>
                 </Box>
-                <Box color="brand.gray" textAlign="center">
+                <Box color="brand.gray" textAlign="center" my="20px">
                     <Text>Don't have a wallet ?</Text>
                     <a href="/create-wallet">
                         <Text as="u" mt="10px" cursor="pointer">

@@ -18,7 +18,7 @@ const RecoverSeedPhraseTemp = () => {
     if (isValidSeedPhrase(phraseKey)) {
       setIsValid(true);
     } else {
-      toaster.danger("Invalid seed phrase");
+      toaster.danger("Invalid seed phrase", { id: "mess" });
     }
   }
 
@@ -29,11 +29,10 @@ const RecoverSeedPhraseTemp = () => {
   return (
     isValid ? < CreatePasswordTemp createWallet={createWallet} isCreatingAcct={isCreatingAcct} /> :
       <NavBar>
-        <Box w="100%">
+        <Box w="100%" pt="120px">
           <Box
             w={{ base: "80%", lg: "40%" }}
             mx="auto"
-            my="30px"
             p="20px"
             boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
             borderRadius="8px"
@@ -67,8 +66,9 @@ const RecoverSeedPhraseTemp = () => {
                 Import Wallet
               </CustomButton>
             </Box>
+            <Text textAlign="center" mt='20px' fontSize={{ base: "12px", lg: "16px" }} color="brand.gray">Already have a walllet ? <a href="/"><Text as="u">Sign In</Text></a></Text>
           </Box>
-          <Box color="brand.gray" textAlign="center">
+          <Box color="brand.gray" textAlign="center" my="20px">
             <Text>Don't have a wallet ?</Text>
             <a href="/create-wallet">
               <Text as="u" mt="10px" cursor="pointer">

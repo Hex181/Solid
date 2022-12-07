@@ -6,8 +6,8 @@ import CustomButton from "../../components/CustomButton/customButton";
 const HomeTemp = () => {
   return (
     <NavBar>
-      <Box className="background">
-        <Box p="20px 60px" w="100%" mt="20px">
+      <Box className="background" pt="105px">
+        <Box p="20px 60px" w="100%">
           <Flex textAlign="center" justifyContent="center">
             <Text fontWeight="700" mr="10px" fontSize={{ base: "25px", lg: "35px" }}>
               SOLID
@@ -25,7 +25,7 @@ const HomeTemp = () => {
             </Box>
           </Box>
         </Box>
-        <Flex justifyContent="space-evenly" w={{ base: "70%", lg: "50%"}} mx="auto" my="40px" display={{ base: "block", lg: "flex" }}>
+        <Flex justifyContent="space-evenly" w={{ base: "70%", lg: "50%"}} mx="auto" my="40px" display={{ base: "block", lg: "flex" }} mb="30px">
           <CustomButton
             w={{ base: "100%", lg: "250px" }}
             bg="black"

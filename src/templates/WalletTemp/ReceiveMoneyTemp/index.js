@@ -8,11 +8,10 @@ const ReceiveMoneyTemp = ({ address, handleSendMoney, handleContinue }) => {
 
   return (
     <AuthNavBar>
-      <Box w="100%">
+      <Box w="100%" pt="130px" pb="40px">
         <Box
           w="40%"
           mx="auto"
-          my="30px"
           p="20px"
           boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
           borderRadius="8px"

@@ -34,11 +34,10 @@ const CreatePasswordTemp = ({ createWallet, isCreatingAcct }) => {
 
   return (
     <NavBar>
-      <Box w="100%">
+      <Box w="100%" pt="120px">
         <Box
           w={{ base: "80%", lg: "40%" }}
           mx="auto"
-          my="30px"
           p="20px"
           boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
           borderRadius="8px"
@@ -79,7 +78,7 @@ const CreatePasswordTemp = ({ createWallet, isCreatingAcct }) => {
         <Text color="black" my="20px" mx="20px" textAlign="center" fontSize={{ base: "12px", lg: "14px" }}>
           Note: Ensure to keep it safe and do not share with any one else.
         </Text>
-        <Box color="brand.gray" textAlign="center">
+        <Box color="brand.gray" textAlign="center" my="20px">
           <Text>Already have a wallet ?</Text>
           <a href="/import-wallet">
             <Text as="u" mt="10px" cursor="pointer">

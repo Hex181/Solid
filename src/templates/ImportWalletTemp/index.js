@@ -6,11 +6,10 @@ import NavBar from "../../components/NavBar";
 const ImportWalletTemp = () => {
   return (
     <NavBar>
-      <Box w="100%">
+      <Box w="100%" pt="120px">
         <Box
           w={{ base: "80%", lg: "40%" }}
           mx="auto"
-          my="30px"
           p="20px"
           boxShadow="rgba(0, 0, 0, 0.05) 0px 0px 0px 1px"
           borderRadius="8px"
@@ -61,7 +60,7 @@ const ImportWalletTemp = () => {
             </CustomButton>
           </Box>
         </Box>
-        <Box color="brand.gray" textAlign="center">
+        <Box color="brand.gray" textAlign="center" my="20px">
           <Text>Don't have a wallet ?</Text>
           <a href="/create-wallet">
                 <Text as="u" mt="10px" cursor="pointer">
