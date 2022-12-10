@@ -88,7 +88,7 @@ const SendMoneyForm = ({ account, handleContinue }) => {
           >
             <Text color="brand.gray">Available to Send</Text>
             <Text fontWeight="bold">
-              {selectedToken ? `${findToken[0]?.balance} ${findToken[0]?.symbol}` : `${nativeBalance} EVMOS`}
+              {selectedToken ? `${findToken[0]?.balance} ${findToken[0]?.symbol}` : `${nativeBalance} ETH`}
             </Text>
           </Flex>
 

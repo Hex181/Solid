@@ -14,12 +14,12 @@ const nftData = [
     name: "Tic Tac",
     image_url: "https://gametable.org/res/images/og/tabletop-tic-tac-toe-og-1200x1200.png",
     desc: "Play-to-Earn mobile strategy game on SOLID protocol",
-    price: "10EVMOS"
+    price: 0.01
   }, {
     name: "Solid NFT",
     desc: "This NFT is given to early adopters of Solid wallet",
     image_url: image,
-    price: 200
+    price: 0.03
   }
 ];
 
@@ -42,11 +42,11 @@ const MarketPlaceTemp = ({ account, handleCloseMarketPlace }) => {
 
   return (
     <AuthNavBar>
-        {displayNoti &&
+      {displayNoti &&
         <Box bg="black" p="10px" pt="80px" textAlign="center" color="white" style={{ transition: "all 1.2s ease" }} pos="absolute" w="100%" mb="20px">
           <Text>Successful!</Text>
         </Box>
-        }
+      }
       <Box p={{ base: "10px 30px", lg: "120px 40px" }}>
         <Text fontWeight="bold" fontSize={{ base: "20px", lg: "45px" }}>
           NFTs
@@ -54,7 +54,7 @@ const MarketPlaceTemp = ({ account, handleCloseMarketPlace }) => {
         <Flex alignItems="center" justifyContent="space-between" display={{ base: 'block', lg: 'flex' }} mt="-10px">
           <Text fontSize={{ base: '14px', lg: '16px' }}>
             NFT collectibles, marketplaces, game projects, utilities building on
-            EVMOS.
+            Ethereum.
           </Text>
           <CustomButton
             w="70%"
@@ -89,7 +89,7 @@ const MarketPlaceTemp = ({ account, handleCloseMarketPlace }) => {
                 <Flex alignItems="center" justifyContent="space-between">
                   <Flex mt="10px">
                     <Box mr="5px">{priceTagIcon}</Box>
-                    <Text fontSize="13px" color="black" fontWeight="bold">{nft.price}</Text>
+                    <Text fontSize="13px" color="black" fontWeight="bold">{nft.price} ETH</Text>
                   </Flex>
                   <Box bg="brand.grey" borderRadius="50%" h="25px" w="25px" p="4px">
                     <Image src={BrandLogo} alt="logo" w="22px" />

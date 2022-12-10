@@ -53,8 +53,8 @@ const ReceiveMoneyForm = ({ address, handleContinue }) => {
           justifyContent="space-between"
           p="20px"
         >
-          <Text color="brand.gray">EVMOS balance</Text>
-          <Text fontWeight="bold">{balance} EVMOS</Text>
+          <Text color="brand.gray">ETH balance</Text>
+          <Text fontWeight="bold">{balance} ETH</Text>
         </Flex>
       </Box>
       <CustomButton

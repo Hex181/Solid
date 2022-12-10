@@ -101,7 +101,7 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney, showMarketPl
                                 <>
                                     {transactions?.map((transaction) => (
                                         <>
-                                            <a href={`https://evm.evmos.${mainnet ? "org" : "dev"}/tx/${transaction.hash}`} target="_blank" rel="noreferrer">
+                                            <a href={`https://goerli.etherscan.io/tx/${transaction.hash}`} target="_blank" rel="noreferrer">
                                                 <Flex justifyContent="space-between" mt="20px">
                                                     <Flex alignItems="center">
                                                         <Box ml="20px" fontSize="14px" color="brand.gray">
@@ -120,7 +120,7 @@ const WalletTemp = ({ account, handleSendMoney, handleReceiveMoney, showMarketPl
                             }
 
                             <Box mt="30px">
-                                <a href={`https://evm.evmos.${mainnet ? "org" : "dev"}/address/${account.address}`} target="_blank" rel="noreferrer">
+                                <a href={`https://goerli.etherscan.io/address/${account.address}`} target="_blank" rel="noreferrer">
                                     <Text as="u" fontSize="14px" >View all transactions</Text>
                                 </a>
                             </Box>

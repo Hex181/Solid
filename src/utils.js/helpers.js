@@ -1,12 +1,12 @@
 import { ethers } from 'ethers';
 import { toaster } from 'evergreen-ui';
-const mainneturl = "https://eth.bd.evmos.org:8545";
-// const testneturl = "https://eth.bd.evmos.dev:8545";
-let url = mainneturl;
+const testneturl = "https://goerli.infura.io/v3/b5ca0401508b4c1e8a13452b413fe67e";
+// const mainneturl = "";
+let url = testneturl;
 const provider = new ethers.providers.JsonRpcProvider(url);
-// const testnetChainId = "9000"
-const mainnetChainId = "9001"
-let chainId = mainnetChainId;
+// const mainnetChainId = ""
+const testnetChainId = "5"
+let chainId = testnetChainId;
 
 
 const key = "ckey_c5e2191c3ca149f69fa06d6dd0e"
@@ -59,7 +59,7 @@ export const isValidSeedPhrase = (phrase) => {
 
 export async function getTransactions(address) {
     try {
-        const res = await fetch(`https://api.covalenthq.com/v1/${chainId}/address/${address}/transactions_v2/?quote-currency=USD&format=JSON&block-signed-at-asc=false&no-logs=false&page-size=10&key=${key}`);
+        const res = await fetch(`https://api.covalenthq.com/v1/${chainId}/address/${address}/transactions_v2/?quote-currency=USD&format=JSON&block-signed-at-asc=false&no-logs=false&page-size=6&key=${key}`);
         const txnJSON = await res.json();
         const txns = (txnJSON).data.items;
         const modifiedTxn = txns.map((t) => {
@@ -75,8 +75,8 @@ export async function getTransactions(address) {
 
 export async function getTokensBalances(address) {
     const res = await fetch(`https://api.covalenthq.com/v1/${chainId}/address/${address}/balances_v2/?quote-currency=USD&format=JSON&nft=true&no-nft-fetch=true&key=${key}`)
-    console.log({ res })
     const balances = (await res.json()).data.items;
+    console.log({ balances })
     const modifiedBalances = balances.map((t) => {
         return {
             address: t.contract_address,
@@ -91,7 +91,7 @@ export async function getTokensBalances(address) {
             value: parseFloat(t.quote.toFixed(2))
         }
     });
-    console.log({ modifiedBalances })
+    console.log({ modifiedBalances });
     return modifiedBalances;
 }
 
