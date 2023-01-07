@@ -1,12 +1,12 @@
 import { ethers } from 'ethers';
 import { toaster } from 'evergreen-ui';
-const testneturl = "https://goerli.infura.io/v3/b5ca0401508b4c1e8a13452b413fe67e";
-// const mainneturl = "";
-let url = testneturl;
+const testneturl = "https://rpc-mumbai.maticvigil.com/v1/022fd3cf836ccc65239550879cee7094077e1578";
+const mainneturl = "https://rpc-mainnet.maticvigil.com/v1/022fd3cf836ccc65239550879cee7094077e1578";
+let url = mainneturl;
 const provider = new ethers.providers.JsonRpcProvider(url);
-// const mainnetChainId = ""
-const testnetChainId = "5"
-let chainId = testnetChainId;
+const mainnetChainId = "137";
+const testnetChainId = "80001";
+let chainId = mainnetChainId;
 
 
 const key = "ckey_c5e2191c3ca149f69fa06d6dd0e"

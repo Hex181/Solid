@@ -54,7 +54,7 @@ const MarketPlaceTemp = ({ account, handleCloseMarketPlace }) => {
         <Flex alignItems="center" justifyContent="space-between" display={{ base: 'block', lg: 'flex' }} mt="-10px">
           <Text fontSize={{ base: '14px', lg: '16px' }}>
             NFT collectibles, marketplaces, game projects, utilities building on
-            Ethereum.
+            Polygon.
           </Text>
           <CustomButton
             w="70%"
@@ -89,7 +89,7 @@ const MarketPlaceTemp = ({ account, handleCloseMarketPlace }) => {
                 <Flex alignItems="center" justifyContent="space-between">
                   <Flex mt="10px">
                     <Box mr="5px">{priceTagIcon}</Box>
-                    <Text fontSize="13px" color="black" fontWeight="bold">{nft.price} ETH</Text>
+                    <Text fontSize="13px" color="black" fontWeight="bold">{nft.price} MATIC</Text>
                   </Flex>
                   <Box bg="brand.grey" borderRadius="50%" h="25px" w="25px" p="4px">
                     <Image src={BrandLogo} alt="logo" w="22px" />
